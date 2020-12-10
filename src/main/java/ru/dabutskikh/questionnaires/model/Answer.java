@@ -18,7 +18,7 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @ManyToMany(mappedBy = "answers")
+    @ManyToMany(mappedBy = "answers", fetch = FetchType.EAGER)
     private List<User> users;
 
     public Answer() {
