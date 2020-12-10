@@ -19,7 +19,7 @@ public class Question {
     private Questionnaire questionnaire;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "question")
-    private List<Question> answers;
+    private List<Answer> answers;
 
     public Question() {
     }
@@ -53,11 +53,11 @@ public class Question {
         this.questionnaire = questionnaire;
     }
 
-    public List<Question> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Question> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 }
