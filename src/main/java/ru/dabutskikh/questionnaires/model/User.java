@@ -17,7 +17,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
     private List<Questionnaire> questionnaires;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
