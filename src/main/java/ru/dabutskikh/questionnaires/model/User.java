@@ -67,4 +67,12 @@ public class User {
     public void setQuestionnaires(List<Questionnaire> questionnaires) {
         this.questionnaires = questionnaires;
     }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 }
