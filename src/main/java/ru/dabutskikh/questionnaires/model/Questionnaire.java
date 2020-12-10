@@ -3,7 +3,7 @@ package ru.dabutskikh.questionnaires.model;
 import javax.persistence.*;
 
 @Entity
-@Table("questionnaire")
+@Table(name = "questionnaire")
 public class Questionnaire {
 
     @Id
