@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "client")
 public class User {
 
     @Id
@@ -20,11 +20,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
     private List<Questionnaire> questionnaires;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_answer",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "answer_id")
-    )
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Answer> answers;
 
     public User() {
