@@ -1,6 +1,7 @@
 package ru.dabutskikh.questionnaires.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "question")
@@ -12,6 +13,13 @@ public class Question {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionnaire_id")
+    private Questionnaire questionnaire;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "question")
+    private List<Question> answers;
 
     public Question() {
     }
@@ -35,5 +43,21 @@ public class Question {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Questionnaire getQuestionnaire() {
+        return questionnaire;
+    }
+
+    public void setQuestionnaire(Questionnaire questionnaire) {
+        this.questionnaire = questionnaire;
+    }
+
+    public List<Question> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Question> answers) {
+        this.answers = answers;
     }
 }
