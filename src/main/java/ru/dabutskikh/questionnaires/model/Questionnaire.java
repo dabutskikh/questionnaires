@@ -16,6 +16,11 @@ public class Questionnaire {
     public Questionnaire() {
     }
 
+    public Questionnaire(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
