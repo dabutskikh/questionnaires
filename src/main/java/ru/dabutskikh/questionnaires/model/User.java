@@ -1,5 +1,7 @@
 package ru.dabutskikh.questionnaires.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class User {
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
+    @ColumnDefault("USER")
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
