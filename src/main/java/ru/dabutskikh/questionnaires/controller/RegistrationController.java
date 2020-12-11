@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.repository.UserRepository;
+import ru.dabutskikh.questionnaires.service.UserService;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @GetMapping
     public String getRegistationPage(Model model) {
@@ -26,11 +27,13 @@ public class RegistrationController {
 
     @PostMapping
     public String addUser(@ModelAttribute("userForm") User userForm) {
-        if (userRepository.findByLogin(userForm.getLogin()).isPresent()) {
+        if (userService.findByLogin(userForm.getLogin()).isPresent()
+                || userForm.getPassword().equals(userForm.getConfirmPassword())
+        ) {
             return "registration";
         } else {
-            userRepository.save(userForm);
-            return "redirect:/";
+            userService.save(userForm);
+            return "redirect:/auth/login";
         }
     }
 }
