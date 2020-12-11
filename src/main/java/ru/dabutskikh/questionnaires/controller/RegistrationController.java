@@ -12,7 +12,7 @@ import ru.dabutskikh.questionnaires.repository.UserRepository;
 
 @Controller
 @RequestMapping("/registration")
-public class RegistationController {
+public class RegistrationController {
 
     @Autowired
     UserRepository userRepository;
