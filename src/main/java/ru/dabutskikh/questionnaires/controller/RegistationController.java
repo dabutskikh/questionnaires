@@ -11,7 +11,7 @@ import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.repository.UserRepository;
 
 @Controller
-@RequestMapping("/registation")
+@RequestMapping("/registration")
 public class RegistationController {
 
     @Autowired
