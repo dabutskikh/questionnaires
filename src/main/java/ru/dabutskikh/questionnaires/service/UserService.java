@@ -8,5 +8,5 @@ public interface UserService {
 
     void save(User user);
 
-    Optional<User> findByLogin(String login);
+    User findByLogin(String login);
 }

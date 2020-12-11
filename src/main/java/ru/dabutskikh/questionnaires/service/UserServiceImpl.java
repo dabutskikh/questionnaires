@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
+    public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 }

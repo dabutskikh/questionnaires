@@ -27,7 +27,7 @@ public class RegistrationController {
 
     @PostMapping
     public String addUser(@ModelAttribute("userForm") User userForm) {
-        if (userService.findByLogin(userForm.getLogin()).isPresent()
+        if (userService.findByLogin(userForm.getLogin()) != null
                 || !userForm.getPassword().equals(userForm.getConfirmPassword())
         ) {
             return "registration";
