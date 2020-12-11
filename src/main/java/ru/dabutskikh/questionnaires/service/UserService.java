@@ -4,5 +4,7 @@ import ru.dabutskikh.questionnaires.model.User;
 
 public interface UserService {
 
-    User create(User user);
+    void save(User user);
+
+    User findByLogin(String login);
 }
