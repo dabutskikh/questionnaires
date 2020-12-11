@@ -27,9 +27,9 @@ public class RegistrationController {
     @PostMapping
     public String addUser(@ModelAttribute("userForm") User userForm) {
         if (userRepository.findByLogin(userForm.getLogin()).isPresent()) {
-            userRepository.save(userForm);
-            return "registation";
+            return "registration";
         } else {
+            userRepository.save(userForm);
             return "redirect:/";
         }
     }
