@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All questionnaires</title>
+</head>
+<body>
+<div>
+    <h2>All questionnaires</h2>
+    <table>
+        <tr th:each="questionnaire : ${questionnaires}">
+            <td th:text="${questionnaire.name}"></td>
+            <td><a th:href="@{/questionnaires/{id}/edit(id=${questionnaire.id})}" th:text="Edit"></a></td>
+            <td><a th:href="@{/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
+            <td>
+                <form th:method="DELETE" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

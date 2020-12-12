@@ -21,8 +21,9 @@ public class QuestionnaireController {
     QuestionnaireService questionnaireService;
 
     @GetMapping
-    public String getAllQuestionnaires() {
-        return null;
+    public String getAllQuestionnaires(Model model) {
+        model.addAttribute("questionnaires", questionnaireService.findAll());
+        return "all_questionnaires";
     }
 
     @PostMapping
