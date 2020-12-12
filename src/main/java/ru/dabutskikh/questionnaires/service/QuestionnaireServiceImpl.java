@@ -21,12 +21,29 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public void editName(Long questionnaireId, String newName) {
-        Questionnaire questionnaire = questionnaireRepository
-                .findById(questionnaireId)
+    public Questionnaire findById(Long id) {
+        return questionnaireRepository
+                .findById(id)
                 .orElseThrow(() -> new NullPointerException());
-        questionnaire.setName(newName);
-        questionnaireRepository.save(questionnaire);
+    }
+
+//    @Override
+//    public void editName(Long questionnaireId, String newName) {
+//        Questionnaire questionnaire = questionnaireRepository
+//                .findById(questionnaireId)
+//                .orElseThrow(() -> new NullPointerException());
+//        questionnaire.setName(newName);
+//        questionnaireRepository.save(questionnaire);
+//    }
+
+    @Override
+    public void update(Long id, Questionnaire questionnaire) {
+        Questionnaire newQuestionnaire = findById(id);
+//        Questionnaire newQuestionnaire = questionnaireRepository
+//                .findById(id)
+//                .orElseThrow(() -> new NullPointerException());
+        newQuestionnaire.setName(questionnaire.getName());
+        save(newQuestionnaire);
     }
 
     @Override
