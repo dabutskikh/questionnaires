@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.service.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.UserService;
+import ru.dabutskikh.questionnaires.util.Container;
 
 @Controller
 @RequestMapping("/questionnaires")
@@ -31,7 +32,7 @@ public class QuestionnaireController {
                                       @AuthenticationPrincipal UserDetails currentUser) {
         questionnaireForm.setAuthor(userService.findByLogin(currentUser.getUsername()));
         questionnaireService.save(questionnaireForm);
-        return "redirect:/";
+        return "redirect:/questionnaires";
     }
 
     @GetMapping("/new")
@@ -41,18 +42,23 @@ public class QuestionnaireController {
         return "new_questionnaire";
     }
 
-    @GetMapping("/{id}")
-    public String getQuestionnaire() {
-        return null;
-    }
+//    @GetMapping("/{id}")
+//    public String getQuestionnaire() {
+//        return null;
+//    }
 
     @GetMapping("/{id}/edit")
-    public String getUpdatingQuestionnairePage() {
-        return null;
+    public String getUpdatingQuestionnairePage(@PathVariable Long id,
+                                               Model model) {
+        model.addAttribute("questionnaireId", id);
+        model.addAttribute("newName", new Container<String>());
+        return "edit_questionnaire";
     }
 
     @PatchMapping("/{id}")
-    public String updateQuestionnaire() {
-        return null;
+    public String updateQuestionnaire(@PathVariable Long id,
+                                      @ModelAttribute Container<String> newName) {
+        questionnaireService.editName(id, newName.getValue());
+        return "redirect:/questionnaires";
     }
 }

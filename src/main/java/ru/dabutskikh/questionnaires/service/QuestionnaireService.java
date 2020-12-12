@@ -8,5 +8,7 @@ public interface QuestionnaireService {
 
     List<Questionnaire> findAll();
 
+    void editName(Long questionnaireId, String newName);
+
     void save(Questionnaire questionnaire);
 }

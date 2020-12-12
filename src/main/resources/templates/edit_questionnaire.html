@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit questionnaire name</title>
+</head>
+<body>
+<div>
+    <form th:method="PATCH" th:action="@{/questionnaires/{id}(id=${questionnaireId})}" th:object="${newName}">
+        <h2>Edit questionnaire name</h2>
+        <p>
+            <label for="name">New name</label>
+            <input type="text" th:field="*{value}" id="name" name="name" placeholder="New name" required>
+        </p>
+        <button type="submit">Edit</button>
+    </form>
+</div>
+</body>
+</html>
