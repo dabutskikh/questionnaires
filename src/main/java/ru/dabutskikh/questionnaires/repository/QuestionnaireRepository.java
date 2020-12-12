@@ -1,7 +1,11 @@
 package ru.dabutskikh.questionnaires.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 
-public interface QuestionnaireRepository extends CrudRepository<Questionnaire, Long> {
+import java.util.List;
+
+public interface QuestionnaireRepository extends JpaRepository<Questionnaire, Long> {
+
+    List<Questionnaire> findAll();
 }
