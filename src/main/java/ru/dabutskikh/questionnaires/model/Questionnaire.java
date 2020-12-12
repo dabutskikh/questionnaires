@@ -60,4 +60,13 @@ public class Questionnaire {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    @Override
+    public String toString() {
+        return "Questionnaire{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author=" + author +
+                '}';
+    }
 }
