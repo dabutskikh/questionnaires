@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New questionnaire</title>
+</head>
+<body>
+<div>
+    <form th:action="POST" th:action="@{/questionnaires}" th:object="questionnaireForm">
+        <h2>New questionnaire</h2>
+        <p>
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>
+        </p>
+        <button type="submit">Create</button>
+    </form>
+</div>
+</body>
+</html>
