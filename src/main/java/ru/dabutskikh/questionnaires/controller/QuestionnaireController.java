@@ -5,10 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.service.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.UserService;
@@ -29,14 +26,16 @@ public class QuestionnaireController {
     }
 
     @PostMapping
-    public String createQuestionnaire() {
-        return null;
+    public String createQuestionnaire(@ModelAttribute Questionnaire questionnaireForm,
+                                      @AuthenticationPrincipal UserDetails currentUser) {
+        questionnaireForm.setAuthor(userService.findByLogin(currentUser.getUsername()));
+        questionnaireService.save(questionnaireForm);
+        return "redirect:/";
     }
 
     @GetMapping("/new")
-    public String getCreatingQuestionnairePage(Model model,
-                                               @AuthenticationPrincipal UserDetails currentUser) {
-        model.addAttribute("author", userService.findByLogin(currentUser.getUsername()));
+    public String getCreatingQuestionnairePage(Model model) {
+
         model.addAttribute("questionnaireForm", new Questionnaire());
         return "new_questionnaire";
     }

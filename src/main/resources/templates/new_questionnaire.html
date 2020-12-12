@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form th:action="POST" th:action="@{/questionnaires}" th:object="questionnaireForm">
+    <form th:method="POST" th:action="@{/questionnaires}" th:object="${questionnaireForm}">
         <h2>New questionnaire</h2>
         <p>
             <label for="name">Name</label>
