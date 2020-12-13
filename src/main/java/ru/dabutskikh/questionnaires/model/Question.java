@@ -14,6 +14,9 @@ public class Question {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "is_multiply_answer")
+    private Boolean multiplyAnswer;
+
     @ManyToOne
     @JoinColumn(name = "questionnaire_id")
     private Questionnaire questionnaire;
@@ -28,9 +31,10 @@ public class Question {
     public Question() {
     }
 
-    public Question(Long id, String name) {
+    public Question(Long id, String name, Boolean multiplyAnswer) {
         this.id = id;
         this.name = name;
+        this.multiplyAnswer = multiplyAnswer;
     }
 
     public Long getId() {
@@ -47,6 +51,14 @@ public class Question {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getMultiplyAnswer() {
+        return multiplyAnswer;
+    }
+
+    public void setMultiplyAnswer(Boolean multiplyAnswer) {
+        this.multiplyAnswer = multiplyAnswer;
     }
 
     public Questionnaire getQuestionnaire() {

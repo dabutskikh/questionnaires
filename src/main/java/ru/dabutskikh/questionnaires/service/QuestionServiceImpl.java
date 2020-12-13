@@ -25,6 +25,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void update(Long id, Question question) {
         Question newQuestion = findById(id);
         newQuestion.setName(question.getName());
+        newQuestion.setMultiplyAnswer(question.getMultiplyAnswer());
         save(newQuestion);
     }
 

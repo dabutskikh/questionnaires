@@ -13,6 +13,10 @@
             <label for="name">New name</label>
             <input type="text" th:field="*{name}" id="name" name="name" placeholder="New name" required>
         </p>
+        <p>
+            <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
+            <label for="is_multiply">is multiply answer</label>
+        </p>
         <button type="submit">Edit</button>
     </form>
 </div>
