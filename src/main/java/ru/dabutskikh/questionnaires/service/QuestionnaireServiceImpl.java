@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.repository.QuestionnaireRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuestionnaireServiceImpl implements QuestionnaireService {
@@ -17,7 +15,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public List<Questionnaire> findAll() {
-        return questionnaireRepository.findAll();
+        List<Questionnaire> questionnaires = questionnaireRepository.findAll();
+        questionnaires.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        return questionnaires;
     }
 
     @Override
