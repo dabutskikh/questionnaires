@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface QuestionnaireRepository extends JpaRepository<Questionnaire, Long> {
 
+    @Override
     List<Questionnaire> findAll();
 
     @Override
