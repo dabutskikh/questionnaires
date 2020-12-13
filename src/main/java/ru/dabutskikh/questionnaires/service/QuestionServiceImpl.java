@@ -3,7 +3,6 @@ package ru.dabutskikh.questionnaires.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.Question;
-import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.repository.QuestionRepository;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionService;
 
@@ -31,6 +30,11 @@ public class QuestionServiceImpl implements QuestionService {
         System.out.println(3);
         save(newQuestion);
         System.out.println(4);
+    }
+
+    @Override
+    public void delete(Long id) {
+        questionRepository.deleteById(id);
     }
 
     @Override

@@ -29,8 +29,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
     private List<Questionnaire> questionnaires;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Answer> answers;
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+//    private List<Answer> answers;
 
     public User() {
     }
@@ -89,13 +90,13 @@ public class User {
         this.questionnaires = questionnaires;
     }
 
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
+//    public List<Answer> getAnswers() {
+//        return answers;
+//    }
+//
+//    public void setAnswers(List<Answer> answers) {
+//        this.answers = answers;
+//    }
 
     @Override
     public String toString() {

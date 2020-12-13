@@ -59,8 +59,15 @@ public class QuestionController {
         questionService.update(id, question);
 
         // Object "question" has null field "questionnaire"
-        // Because should get id of parent questionnaire using service
+        // because should get id of parent questionnaire using service
         return "redirect:/questions?questionnaire_id="
                 + questionService.findById(id).getQuestionnaire().getId();
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteQuestion(@PathVariable Long id) {
+        Long parentQuestionnaireId = questionService.findById(id).getQuestionnaire().getId();
+        questionService.delete(id);
+        return "redirect:/questions?questionnaire_id=" + parentQuestionnaireId;
     }
 }

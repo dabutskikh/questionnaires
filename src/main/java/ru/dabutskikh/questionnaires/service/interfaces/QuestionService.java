@@ -10,6 +10,8 @@ public interface QuestionService {
 
     void update(Long id, Question question);
 
+    void delete(Long id);
+
     void save(Question question);
 
     List<Question> getAllQuestionsByQuestionnaireId(Long questionnaireId);

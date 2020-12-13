@@ -18,7 +18,12 @@ public class Question {
     @JoinColumn(name = "questionnaire_id")
     private Questionnaire questionnaire;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "question")
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER,
+            mappedBy = "question"
+    )
     private List<Answer> answers;
 
     public Question() {
@@ -60,6 +65,13 @@ public class Question {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
+
+//    @PreRemove
+//    private void removeAnswers() {
+//        for (Answer answer : answers) {
+//            u.getEducationses().remove(this);
+//        }
+//    }
 
     @Override
     public String toString() {
