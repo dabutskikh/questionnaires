@@ -26,7 +26,7 @@ public class AnswerController {
                 questionService.findById(questionId)
         );
         model.addAttribute("answers",
-                answerService.getAllQuestionsByQuestionnaireId(questionId)
+                answerService.getAllAnswersByQuestionId(questionId)
         );
         return "all_answers_of_question";
     }
