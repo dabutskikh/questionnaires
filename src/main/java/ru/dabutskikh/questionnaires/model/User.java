@@ -26,7 +26,11 @@ public class User {
     @Column(name = "role")
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "author",
+            orphanRemoval = true
+    )
     private List<Questionnaire> questionnaires;
 
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

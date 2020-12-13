@@ -14,7 +14,7 @@ public class Answer {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
 

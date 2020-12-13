@@ -14,11 +14,15 @@ public class Questionnaire {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionnaire")
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "questionnaire",
+            orphanRemoval = true
+    )
     private List<Question> questions;
 
     public Questionnaire() {
