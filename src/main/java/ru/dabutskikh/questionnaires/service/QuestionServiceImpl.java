@@ -23,13 +23,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void update(Long id, Question question) {
-        System.out.println(1);
         Question newQuestion = findById(id);
-        System.out.println(2);
         newQuestion.setName(question.getName());
-        System.out.println(3);
         save(newQuestion);
-        System.out.println(4);
     }
 
     @Override
