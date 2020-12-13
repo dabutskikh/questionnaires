@@ -16,14 +16,18 @@ public class QuestionController {
     @Autowired
     QuestionnaireService questionnaireService;
 
-    //@Autowired
-    //QuestionService questionService;
+    @Autowired
+    QuestionService questionService;
 
     @GetMapping
     public String getAllQuestionsByQustionnaireId(Model model,
                                                   @RequestParam("questionnaire_id") Long questionnaireId) {
-        model.addAttribute("parentQuestionnaire", questionnaireService.findById(questionnaireId));
-        //model.addAttribute("questions", questionService.findAllByQuestionnaireId(questionnaireId));
+        model.addAttribute("parentQuestionnaire",
+                questionnaireService.findById(questionnaireId)
+        );
+        model.addAttribute("questions",
+                questionService.getAllQuestionsByQuestionnaireId(questionnaireId)
+        );
         return "all_questions_of_questionnaire";
     }
 }
