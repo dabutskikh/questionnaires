@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New answer</title>
+</head>
+<body>
+<div>
+    <h2 th:text="'New answer for question ' + ${parentQuestion.name}"/>
+    <a th:href="@{/answers(question_id=${parentQuestion.id})}">Back</a>
+    <form th:method="POST" th:action="@{/answers(question_id=${parentQuestion.id})}"
+          th:object="${answerForm}">
+        <p>
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>
+        </p>
+        <button type="submit">Create</button>
+    </form>
+</div>
+</body>
+</html>
