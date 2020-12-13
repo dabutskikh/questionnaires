@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Questions of questionnaire</title>
+</head>
+<body>
+<div>
+    <h2 th:text="'Questions of questionnaire ' + ${parentQuestionnaire.name}"/>
+    <table>
+        <tr th:each="question : ${parentQuestionnaire.questions}">
+            <td th:text="${question.name}"></td>
+            <td><a th:href="@{/questions/{id}/edit(id=${question.id})}" th:text="Edit"></a></td>
+            <td><a th:href="@{/answers(question_id=${question.id})}" th:text="Answers"></a></td>
+            <td>
+                <form th:method="DELETE" th:action="@{/questions/{id}(id=${question.id})}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
