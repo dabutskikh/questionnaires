@@ -19,7 +19,7 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping
-    public String getAllQuestionsByQustionnaireId(Model model,
+    public String getAllQuestionsByQuestionnaireId(Model model,
                                                   @RequestParam("questionnaire_id") Long questionnaireId) {
         model.addAttribute("parentQuestionnaire",
                 questionnaireService.findById(questionnaireId)
