@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.Role;
 import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.repository.UserRepository;
-
-import java.util.Optional;
+import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

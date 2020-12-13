@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dabutskikh.questionnaires.model.User;
-import ru.dabutskikh.questionnaires.repository.UserRepository;
-import ru.dabutskikh.questionnaires.service.UserService;
+import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 @Controller
 @RequestMapping("/registration")

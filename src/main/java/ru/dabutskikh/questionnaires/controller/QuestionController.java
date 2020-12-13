@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.dabutskikh.questionnaires.service.QuestionService;
-import ru.dabutskikh.questionnaires.service.QuestionnaireService;
+import ru.dabutskikh.questionnaires.service.interfaces.QuestionService;
+import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 
 @Controller
 @RequestMapping("/questions")

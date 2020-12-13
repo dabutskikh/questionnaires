@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
-import ru.dabutskikh.questionnaires.service.QuestionnaireService;
-import ru.dabutskikh.questionnaires.service.UserService;
+import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
+import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 @Controller
 @RequestMapping("/questionnaires")
