@@ -45,4 +45,22 @@ public class QuestionController {
         model.addAttribute("questionForm", new Question());
         return "new_question";
     }
+
+    @GetMapping("/{id}/edit")
+    public String getUpdatingQuestionPage(@PathVariable Long id,
+                                          Model model) {
+        model.addAttribute("question", questionService.findById(id));
+        return "edit_question";
+    }
+
+    @PatchMapping("/{id}")
+    public String updateQuestion(@PathVariable Long id,
+                                 @ModelAttribute Question question) {
+        questionService.update(id, question);
+
+        // Object "question" has null field "questionnaire"
+        // Because should get id of parent questionnaire using service
+        return "redirect:/questions?questionnaire_id="
+                + questionService.findById(id).getQuestionnaire().getId();
+    }
 }
