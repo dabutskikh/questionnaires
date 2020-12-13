@@ -2,13 +2,14 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New questionnaire</title>
+    <title>New question</title>
 </head>
 <body>
 <div>
-    <h2>New questionnaire</h2>
-    <a href="/questionnaires">Back</a>
-    <form th:method="POST" th:action="@{/questionnaires}" th:object="${questionnaireForm}">
+    <h2 th:text="'New question for questionnaire ' + ${parentQuestionnaire.name}"/>
+    <a th:href="@{/questions(questionnaire_id=${parentQuestionnaire.id})}">Back</a>
+    <form th:method="POST" th:action="@{/questions(questionnaire_id=${parentQuestionnaire.id})}"
+          th:object="${questionForm}">
         <p>
             <label for="name">Name</label>
             <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>

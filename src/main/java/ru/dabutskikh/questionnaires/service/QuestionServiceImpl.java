@@ -15,6 +15,11 @@ public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
 
     @Override
+    public void save(Question question) {
+        questionRepository.save(question);
+    }
+
+    @Override
     public List<Question> getAllQuestionsByQuestionnaireId(Long questionnaireId) {
         List<Question> questions = questionRepository.findByQuestionnaireId(questionnaireId);
         questions.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));

@@ -6,8 +6,9 @@
 </head>
 <body>
 <div>
+    <h2>Edit questionnaire name</h2>
+    <a href="/questionnaires">Back</a>
     <form th:method="PATCH" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}" th:object="${questionnaire}">
-        <h2>Edit questionnaire name</h2>
         <p>
             <label for="name">New name</label>
             <input type="text" th:field="*{name}" id="name" name="name" placeholder="New name" required>
