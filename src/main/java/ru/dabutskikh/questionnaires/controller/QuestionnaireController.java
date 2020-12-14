@@ -55,14 +55,14 @@ public class QuestionnaireController {
         return "redirect:/questionnaires";
     }
 
-    @DeleteMapping("/{id}")
-    public String changeStatus(@PathVariable Long id) {
-        Questionnaire questionnaire = questionnaireService.findById(id);
-        if (questionnaire.getPublished()) {
-            questionnaireService.toUnpublish(questionnaire);
-        } else {
-            questionnaireService.toPublish(questionnaire);
-        }
-        return "redirect:/questionnaires";
-    }
+//    @DeleteMapping("/{id}")
+//    public String changeStatus(@PathVariable Long id) {
+//        Questionnaire questionnaire = questionnaireService.findById(id);
+//        if (questionnaire.getPublished()) {
+//            questionnaireService.toUnpublish(questionnaire);
+//        } else {
+//            questionnaireService.toPublish(questionnaire);
+//        }
+//        return "redirect:/questionnaires";
+//    }
 }

@@ -14,8 +14,9 @@ public class Questionnaire {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "is_published")
-    private Boolean published;
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private QuestionnaireStatus status;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
@@ -34,7 +35,7 @@ public class Questionnaire {
     public Questionnaire(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.published = false;
+        this.status = QuestionnaireStatus.CREATED;
     }
 
     public Long getId() {
@@ -53,12 +54,12 @@ public class Questionnaire {
         this.name = name;
     }
 
-    public Boolean getPublished() {
-        return published;
+    public QuestionnaireStatus getStatus() {
+        return status;
     }
 
-    public void setPublished(Boolean published) {
-        this.published = published;
+    public void setStatus(QuestionnaireStatus status) {
+        this.status = status;
     }
 
     public User getAuthor() {

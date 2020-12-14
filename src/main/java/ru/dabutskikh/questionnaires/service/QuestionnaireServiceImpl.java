@@ -36,25 +36,25 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         save(newQuestionnaire);
     }
 
-    @Override
-    public void toPublish(Questionnaire questionnaire) {
-        if (questionnaire.getQuestions().size() == 0) {
-            return;
-        }
-        for (Question question : questionnaire.getQuestions()) {
-            if (question.getAnswers().size() < 2) {
-                return;
-            }
-        }
-        questionnaire.setPublished(true);
-        save(questionnaire);
-    }
-
-    @Override
-    public void toUnpublish(Questionnaire questionnaire) {
-        questionnaire.setPublished(false);
-        save(questionnaire);
-    }
+//    @Override
+//    public void toPublish(Questionnaire questionnaire) {
+//        if (questionnaire.getQuestions().size() == 0) {
+//            return;
+//        }
+//        for (Question question : questionnaire.getQuestions()) {
+//            if (question.getAnswers().size() < 2) {
+//                return;
+//            }
+//        }
+//        questionnaire.setPublished(true);
+//        save(questionnaire);
+//    }
+//
+//    @Override
+//    public void toUnpublish(Questionnaire questionnaire) {
+//        questionnaire.setPublished(false);
+//        save(questionnaire);
+//    }
 
     @Override
     public void save(Questionnaire questionnaire) {

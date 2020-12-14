@@ -14,7 +14,7 @@ public interface QuestionnaireService {
 
     void update(Long id, Questionnaire questionnaire);
 
-    void toPublish(Questionnaire questionnaire);
-
-    void toUnpublish(Questionnaire questionnaire);
+//    void toPublish(Questionnaire questionnaire);
+//
+//    void toUnpublish(Questionnaire questionnaire);
 }
