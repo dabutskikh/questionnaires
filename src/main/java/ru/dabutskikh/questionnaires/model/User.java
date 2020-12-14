@@ -1,9 +1,9 @@
 package ru.dabutskikh.questionnaires.model;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -33,9 +33,8 @@ public class User {
     )
     private List<Questionnaire> questionnaires;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @ManyToMany(mappedBy = "users")
-    private List<Answer> answers;
+    @ManyToMany
+    private Set<Answer> answers = new HashSet<>();
 
     public User() {
     }
@@ -94,12 +93,16 @@ public class User {
         this.questionnaires = questionnaires;
     }
 
-    public List<Answer> getAnswers() {
+    public Set<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
+    }
+
+    public void addAnswers(Set<Answer> answers) {
+        this.answers.addAll(answers);
     }
 
     @Override

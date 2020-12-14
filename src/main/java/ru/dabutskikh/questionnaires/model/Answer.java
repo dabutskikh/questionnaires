@@ -2,6 +2,7 @@ package ru.dabutskikh.questionnaires.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "answer")
@@ -18,9 +19,8 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    //    @ManyToMany(mappedBy = "answers", fetch = FetchType.EAGER)
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<User> users;
+    @ManyToMany(mappedBy = "answers")
+    private Set<User> users;
 
     public Answer() {
     }
@@ -54,11 +54,11 @@ public class Answer {
         this.question = question;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
