@@ -37,24 +37,21 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     }
 
     @Override
-    public boolean toPublish(Long id) {
-        Questionnaire questionnaire = findById(id);
+    public void toPublish(Questionnaire questionnaire) {
         if (questionnaire.getQuestions().size() == 0) {
-            return false;
+            return;
         }
         for (Question question : questionnaire.getQuestions()) {
             if (question.getAnswers().size() < 2) {
-                return false;
+                return;
             }
         }
         questionnaire.setPublished(true);
         save(questionnaire);
-        return true;
     }
 
     @Override
-    public void toUnpublish(Long id) {
-        Questionnaire questionnaire = findById(id);
+    public void toUnpublish(Questionnaire questionnaire) {
         questionnaire.setPublished(false);
         save(questionnaire);
     }

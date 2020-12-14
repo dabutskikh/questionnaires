@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All questionnaires</title>
@@ -14,7 +14,7 @@
             <td><a th:href="@{/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
             <td>
                 <form th:method="DELETE" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}">
-                    <button type="submit">Delete</button>
+                    <button type="submit" th:text="${questionnaire.published} ? 'Unpublish' : 'Publish'"></button>
                 </form>
             </td>
         </tr>

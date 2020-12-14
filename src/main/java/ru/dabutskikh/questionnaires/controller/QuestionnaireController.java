@@ -41,11 +41,6 @@ public class QuestionnaireController {
         return "new_questionnaire";
     }
 
-//    @GetMapping("/{id}")
-//    public String getQuestionnaire() {
-//        return null;
-//    }
-
     @GetMapping("/{id}/edit")
     public String getUpdatingQuestionnairePage(@PathVariable Long id,
                                                Model model) {
@@ -57,6 +52,17 @@ public class QuestionnaireController {
     public String updateQuestionnaire(@PathVariable Long id,
                                       @ModelAttribute Questionnaire questionnaire) {
         questionnaireService.update(id, questionnaire);
+        return "redirect:/questionnaires";
+    }
+
+    @DeleteMapping("/{id}")
+    public String changeStatus(@PathVariable Long id) {
+        Questionnaire questionnaire = questionnaireService.findById(id);
+        if (questionnaire.getPublished()) {
+            questionnaireService.toUnpublish(questionnaire);
+        } else {
+            questionnaireService.toPublish(questionnaire);
+        }
         return "redirect:/questionnaires";
     }
 }
