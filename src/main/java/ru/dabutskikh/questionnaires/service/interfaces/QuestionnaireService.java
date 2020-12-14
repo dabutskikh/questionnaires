@@ -13,4 +13,8 @@ public interface QuestionnaireService {
     void save(Questionnaire questionnaire);
 
     void update(Long id, Questionnaire questionnaire);
+
+    boolean toPublish(Long id);
+
+    void toUnpublish(Long id);
 }

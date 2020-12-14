@@ -2,6 +2,7 @@ package ru.dabutskikh.questionnaires.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.dabutskikh.questionnaires.model.Question;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.repository.QuestionnaireRepository;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
@@ -28,23 +29,34 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
                 .orElseThrow(() -> new NullPointerException());
     }
 
-//    @Override
-//    public void editName(Long questionnaireId, String newName) {
-//        Questionnaire questionnaire = questionnaireRepository
-//                .findById(questionnaireId)
-//                .orElseThrow(() -> new NullPointerException());
-//        questionnaire.setName(newName);
-//        questionnaireRepository.save(questionnaire);
-//    }
-
     @Override
     public void update(Long id, Questionnaire questionnaire) {
         Questionnaire newQuestionnaire = findById(id);
-//        Questionnaire newQuestionnaire = questionnaireRepository
-//                .findById(id)
-//                .orElseThrow(() -> new NullPointerException());
         newQuestionnaire.setName(questionnaire.getName());
         save(newQuestionnaire);
+    }
+
+    @Override
+    public boolean toPublish(Long id) {
+        Questionnaire questionnaire = findById(id);
+        if (questionnaire.getQuestions().size() == 0) {
+            return false;
+        }
+        for (Question question : questionnaire.getQuestions()) {
+            if (question.getAnswers().size() < 2) {
+                return false;
+            }
+        }
+        questionnaire.setPublished(true);
+        save(questionnaire);
+        return true;
+    }
+
+    @Override
+    public void toUnpublish(Long id) {
+        Questionnaire questionnaire = findById(id);
+        questionnaire.setPublished(false);
+        save(questionnaire);
     }
 
     @Override
