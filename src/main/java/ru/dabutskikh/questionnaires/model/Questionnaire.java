@@ -14,6 +14,9 @@ public class Questionnaire {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "is_published")
+    private Boolean published;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
@@ -31,6 +34,7 @@ public class Questionnaire {
     public Questionnaire(Long id, String name) {
         this.id = id;
         this.name = name;
+        this.published = false;
     }
 
     public Long getId() {
@@ -47,6 +51,14 @@ public class Questionnaire {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
     }
 
     public User getAuthor() {
