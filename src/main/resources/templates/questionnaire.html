@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaire</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/questionnaire}" th:method="post" th:object="${user}">
+        <ul>
+            <li th:each="question : ${questionnaire.questions}">
+                <div>
+                    <p th:text="${question.name}"></p>
+                    <ul>
+                        <li th:each="answer : ${question.answers}">
+                            <div>
+                                <input type="checkbox" th:field="*{answers}" th:value="${answer.id}">
+                                <label th:text="${answer.name}"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+
+            </li>
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

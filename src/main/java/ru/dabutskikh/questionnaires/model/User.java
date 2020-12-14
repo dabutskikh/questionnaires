@@ -34,8 +34,8 @@ public class User {
     private List<Questionnaire> questionnaires;
 
 //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
-//    private List<Answer> answers;
+    @ManyToMany(mappedBy = "users")
+    private List<Answer> answers;
 
     public User() {
     }
@@ -94,21 +94,28 @@ public class User {
         this.questionnaires = questionnaires;
     }
 
-//    public List<Answer> getAnswers() {
-//        return answers;
-//    }
-//
-//    public void setAnswers(List<Answer> answers) {
-//        this.answers = answers;
-//    }
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role.name() +
+                "answers=" + answers +
                 '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", login='" + login + '\'' +
+//                ", password='" + password + '\'' +
+//                ", role=" + role.name() +
+//                '}';
+//    }
 }

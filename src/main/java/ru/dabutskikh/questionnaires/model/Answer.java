@@ -18,9 +18,9 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-////    @ManyToMany(mappedBy = "answers", fetch = FetchType.EAGER)
-//    private List<User> users;
+    //    @ManyToMany(mappedBy = "answers", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Answer() {
     }
@@ -54,13 +54,13 @@ public class Answer {
         this.question = question;
     }
 
-//    public List<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(List<User> users) {
-//        this.users = users;
-//    }
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     @Override
     public String toString() {
