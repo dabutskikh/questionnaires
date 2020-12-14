@@ -16,7 +16,10 @@
                     <ul>
                         <li th:each="answer : ${question.answers}">
                             <div>
-                                <input type="checkbox" th:field="*{answers}" th:value="${answer.id}">
+                                <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
+                                       th:name="${question.name}" th:field="*{answers}"
+                                       th:value="${answer.id}"
+                                >
                                 <label th:text="${answer.name}"></label>
                             </div>
                         </li>
