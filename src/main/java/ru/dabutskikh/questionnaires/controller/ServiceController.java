@@ -41,7 +41,7 @@ public class ServiceController {
 
     @GetMapping("/watch")
     public String getCompletedQuestionnaire(@AuthenticationPrincipal UserDetails currentUser,
-                                            @RequestParam Long questionnaireId,
+                                            @RequestParam("questionnaire_id") Long questionnaireId,
                                             Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
         Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
