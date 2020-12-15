@@ -82,14 +82,14 @@ public class Questionnaire {
         return status.equals(QuestionnaireStatus.CREATED);
     }
 
-    @Override
-    public String toString() {
-        return "Questionnaire{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                ", author=" + author +
-                ", questions=" + questions +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Questionnaire{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", status=" + status +
+//                ", author=" + author +
+//                ", questions=" + questions +
+//                '}';
+//    }
 }

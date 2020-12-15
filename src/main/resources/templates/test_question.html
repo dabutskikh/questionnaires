@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<div>
+    <h2 th:text="${questionnaire.name}"/>
+    <h2 th:text="'№' + ${idxQuestion} + ': ' + ${question.name}"/>
+    <form th:method="POST"
+          th:action="@{/questionaire/{id_questionnaire}(questionnaire_id=${questionnaire.id},
+                question=${idxQuestion})}"
+          th:object="${userForm}">
+        <ul>
+            <li th:each="answer : ${question.answers}">
+                <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
+                       th:field="*{answers}"
+                       th:value="${answer.id}"
+                >
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>

@@ -66,12 +66,12 @@ public class Answer {
         return question.isChangeable();
     }
 
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", question=" + question +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Answer{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", question=" + question +
+//                '}';
+//    }
 }

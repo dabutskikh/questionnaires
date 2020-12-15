@@ -105,12 +105,12 @@ public class User {
 //        this.answers.addAll(answers);
 //    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "answers=" + answers +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "answers=" + answers +
+//                '}';
+//    }
 
     //    @Override
 //    public String toString() {
