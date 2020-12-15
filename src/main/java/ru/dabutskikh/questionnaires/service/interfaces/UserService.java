@@ -12,4 +12,6 @@ public interface UserService {
     void addAnswers(User user, Set<Answer> answers);
 
     User findByLogin(String login);
+
+    void deleteAnswers(User user);
 }

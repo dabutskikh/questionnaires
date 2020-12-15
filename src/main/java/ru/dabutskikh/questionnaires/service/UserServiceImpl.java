@@ -37,4 +37,10 @@ public class UserServiceImpl implements UserService {
     public User findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
+
+    @Override
+    public void deleteAnswers(User user) {
+        user.setAnswers(null);
+        userRepository.save(user);
+    }
 }
