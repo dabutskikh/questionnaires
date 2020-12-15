@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.Question;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
+import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
 import ru.dabutskikh.questionnaires.repository.QuestionnaireRepository;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 
@@ -37,25 +38,31 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         save(newQuestionnaire);
     }
 
-//    @Override
-//    public void toPublish(Questionnaire questionnaire) {
-//        if (questionnaire.getQuestions().size() == 0) {
-//            return;
-//        }
-//        for (Question question : questionnaire.getQuestions()) {
-//            if (question.getAnswers().size() < 2) {
-//                return;
-//            }
-//        }
-//        questionnaire.setPublished(true);
-//        save(questionnaire);
-//    }
-//
-//    @Override
-//    public void toUnpublish(Questionnaire questionnaire) {
-//        questionnaire.setPublished(false);
-//        save(questionnaire);
-//    }
+    @Override
+    public void toPublish(Questionnaire questionnaire) {
+        if (questionnaire.getQuestions().size() == 0) {
+            return;
+        }
+        for (Question question : questionnaire.getQuestions()) {
+            if (question.getAnswers().size() < 2) {
+                return;
+            }
+        }
+        questionnaire.setStatus(QuestionnaireStatus.PUBLISHED);
+        save(questionnaire);
+    }
+
+    @Override
+    public void toHide(Questionnaire questionnaire) {
+        questionnaire.setStatus(QuestionnaireStatus.HIDDEN);
+        save(questionnaire);
+    }
+
+    @Override
+    public void toShow(Questionnaire questionnaire) {
+        questionnaire.setStatus(QuestionnaireStatus.PUBLISHED);
+        save(questionnaire);
+    }
 
     @Override
     public void save(Questionnaire questionnaire) {

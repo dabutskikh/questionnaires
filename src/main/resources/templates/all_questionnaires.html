@@ -12,11 +12,15 @@
             <td th:text="${questionnaire.name}"></td>
             <td><a th:href="@{/questionnaires/{id}/edit(id=${questionnaire.id})}" th:text="Edit"></a></td>
             <td><a th:href="@{/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
-<!--            <td>-->
-<!--                <form th:method="DELETE" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}">-->
-<!--                    <button type="submit" th:text="${questionnaire.published} ? 'Unpublish' : 'Publish'"></button>-->
-<!--                </form>-->
-<!--            </td>-->
+            <td>
+                <form th:method="DELETE" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}">
+                    <th:block th:switch="${questionnaire.status.name()}">
+                        <button th:case="'CREATED'">Publish</button>
+                        <button th:case="'PUBLISHED'">Hide</button>
+                        <button th:case="'HIDDEN'">Show</button>
+                    </th:block>
+                </form>
+            </td>
         </tr>
     </table>
     <a href="/questionnaires/new">Add</a>
