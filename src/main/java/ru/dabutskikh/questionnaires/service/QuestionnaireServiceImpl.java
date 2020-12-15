@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.Question;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
+import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.repository.QuestionnaireRepository;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 
@@ -67,5 +68,26 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Override
     public void save(Questionnaire questionnaire) {
         questionnaireRepository.save(questionnaire);
+    }
+
+    @Override
+    public Set<Questionnaire> getCompletedQuestionnaires(User user) {
+        Set<Questionnaire> result = new HashSet<>();
+        user.getAnswers().forEach(
+                answer -> result.add(answer.getQuestion().getQuestionnaire())
+        );
+        return result;
+    }
+
+    @Override
+    public Set<Questionnaire> getAvailableQuestionnaires(User user) {
+        Set<Questionnaire> result = new HashSet<>();
+        List<Questionnaire> allQuestionnaires = findAll();
+        allQuestionnaires.stream()
+                .filter(questionnaire ->
+                        questionnaire.getStatus().equals(QuestionnaireStatus.PUBLISHED)
+                                && !getCompletedQuestionnaires(user).contains(questionnaire))
+                .forEach(result::add);
+        return result;
     }
 }

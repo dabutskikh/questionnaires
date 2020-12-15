@@ -1,8 +1,10 @@
 package ru.dabutskikh.questionnaires.service.interfaces;
 
 import ru.dabutskikh.questionnaires.model.Questionnaire;
+import ru.dabutskikh.questionnaires.model.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface QuestionnaireService {
 
@@ -19,4 +21,8 @@ public interface QuestionnaireService {
     void toHide(Questionnaire questionnaire);
 
     void toShow(Questionnaire questionnaire);
+
+    Set<Questionnaire> getCompletedQuestionnaires(User user);
+
+    Set<Questionnaire> getAvailableQuestionnaires(User user);
 }
