@@ -1,6 +1,7 @@
 package ru.dabutskikh.questionnaires.service.interfaces;
 
 import ru.dabutskikh.questionnaires.model.Answer;
+import ru.dabutskikh.questionnaires.model.Question;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.User;
 
@@ -17,4 +18,8 @@ public interface UserService {
     void deleteAnswers(User user);
 
     Set<Answer> getQuestionnaireAnswers(User user, Questionnaire questionnaire);
+
+    Set<Answer> getQuestionAnswers(User user, Question question);
+
+    void replaceQuestionAnswers(User user, Question question, Set<Answer> newAnswers);
 }

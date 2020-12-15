@@ -58,4 +58,25 @@ public class UserServiceImpl implements UserService {
 
         return result;
     }
+
+    @Override
+    public Set<Answer> getQuestionAnswers(User user, Question question) {
+        Set<Answer> result = new HashSet<>();
+
+        Set<Answer> questionAnswers = new HashSet<>(question.getAnswers());
+
+        user.getAnswers().stream()
+                .filter(questionAnswers::contains)
+                .forEach(result::add);
+
+        return result;
+    }
+
+    @Override
+    public void replaceQuestionAnswers(User user, Question question, Set<Answer> newAnswers) {
+        Set<Answer> oldAnswers = getQuestionAnswers(user, question);
+        user.getAnswers().removeAll(oldAnswers);
+        user.getAnswers().addAll(newAnswers);
+        userRepository.save(user);
+    }
 }
