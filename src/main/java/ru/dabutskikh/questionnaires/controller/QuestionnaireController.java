@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
+import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
@@ -30,6 +31,7 @@ public class QuestionnaireController {
     public String createQuestionnaire(@ModelAttribute Questionnaire questionnaireForm,
                                       @AuthenticationPrincipal UserDetails currentUser) {
         questionnaireForm.setAuthor(userService.findByLogin(currentUser.getUsername()));
+        questionnaireForm.setStatus(QuestionnaireStatus.CREATED);
         questionnaireService.save(questionnaireForm);
         return "redirect:/questionnaires";
     }

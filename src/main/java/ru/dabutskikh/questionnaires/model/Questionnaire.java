@@ -14,8 +14,8 @@ public class Questionnaire {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
     private QuestionnaireStatus status;
 
     @ManyToOne
@@ -83,7 +83,9 @@ public class Questionnaire {
         return "Questionnaire{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", status=" + status +
                 ", author=" + author +
+                ", questions=" + questions +
                 '}';
     }
 }

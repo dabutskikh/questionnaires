@@ -101,9 +101,9 @@ public class User {
         this.answers = answers;
     }
 
-    public void addAnswers(Set<Answer> answers) {
-        this.answers.addAll(answers);
-    }
+//    public void addAnswers(Set<Answer> answers) {
+//        this.answers.addAll(answers);
+//    }
 
     @Override
     public String toString() {

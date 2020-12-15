@@ -17,7 +17,7 @@
                         <li th:each="answer : ${question.answers}">
                             <div>
                                 <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
-                                       th:name="${question.name}" th:field="*{answers}"
+                                       th:attr="name=${question.name}" th:field="*{answers}"
                                        th:value="${answer.id}"
                                 >
                                 <label th:text="${answer.name}"></label>
@@ -26,11 +26,16 @@
                     </ul>
                 </div>
                 <hr>
-
             </li>
         </ul>
         <button type="submit">Submit</button>
     </form>
+<!--    <script>-->
+<!--        let inputs = document.getElementsByTagName('input');-->
+<!--        for (let i = 0; i < inputs.length; i++) {-->
+<!--            inputs[i].setAttribute('name', inputs[i].getAttribute('class'));-->
+<!--        }-->
+<!--    </script>-->
 </div>
 </body>
 </html>

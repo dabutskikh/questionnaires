@@ -35,8 +35,7 @@ public class UserQuestionnaireController {
     public String postQuestionnaire(@ModelAttribute("user") User user,
                                     @AuthenticationPrincipal UserDetails currentUserDetails) {
         User currentUser = userService.findByLogin(currentUserDetails.getUsername());
-        currentUser.addAnswers(user.getAnswers());
-        userService.save(currentUser);
+        userService.addAnswers(currentUser, user.getAnswers());
         return "redirect:/";
     }
 }
