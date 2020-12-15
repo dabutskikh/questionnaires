@@ -49,25 +49,35 @@ public class AnswerController {
     @GetMapping("/{id}/edit")
     public String getUpdatingAnswerPage(@PathVariable Long id,
                                         Model model) {
+        Answer answer = answerService.findById(id);
+        if (!answer.isChangeable()) {
+            return "redirect:/answers?question_id="
+                    + answer.getQuestion().getId();
+        }
+
         model.addAttribute("answer", answerService.findById(id));
         return "edit_answer";
     }
 
     @PatchMapping("/{id}")
     public String updateAnswer(@PathVariable Long id,
-                               @ModelAttribute Answer answer) {
-        answerService.update(id, answer);
+                               @ModelAttribute Answer newAnswer) {
+        Answer answer = answerService.findById(id);
+        if (answer.isChangeable()) {
+            answerService.update(id, newAnswer);
+        }
 
-        // Object "answer" has null field "question"
-        // because should get id of parent question using service
         return "redirect:/answers?question_id="
-                + answerService.findById(id).getQuestion().getId();
+                + answer.getQuestion().getId();
     }
 
     @DeleteMapping("/{id}")
     public String deleteAnswer(@PathVariable Long id) {
-        Long parentQuestionId = answerService.findById(id).getQuestion().getId();
-        answerService.delete(id);
+        Answer answer = answerService.findById(id);
+        Long parentQuestionId = answer.getQuestion().getId();
+        if (answer.isChangeable()) {
+            answerService.delete(id);
+        }
         return "redirect:/answers?question_id=" + parentQuestionId;
     }
 }

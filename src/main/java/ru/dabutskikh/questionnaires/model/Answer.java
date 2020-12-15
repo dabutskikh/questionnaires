@@ -62,6 +62,10 @@ public class Answer {
         this.users = users;
     }
 
+    public boolean isChangeable() {
+        return question.isChangeable();
+    }
+
     @Override
     public String toString() {
         return "Answer{" +

@@ -46,14 +46,22 @@ public class QuestionnaireController {
     @GetMapping("/{id}/edit")
     public String getUpdatingQuestionnairePage(@PathVariable Long id,
                                                Model model) {
-        model.addAttribute("questionnaire", questionnaireService.findById(id));
+        Questionnaire questionnaire = questionnaireService.findById(id);
+        if (!questionnaire.isChangeable()) {
+            return "redirect:/questionnaires";
+        }
+
+        model.addAttribute("questionnaire", questionnaire);
         return "edit_questionnaire";
     }
 
     @PatchMapping("/{id}")
     public String updateQuestionnaire(@PathVariable Long id,
-                                      @ModelAttribute Questionnaire questionnaire) {
-        questionnaireService.update(id, questionnaire);
+                                      @ModelAttribute Questionnaire newQuestionnaire) {
+        Questionnaire questionnaire = questionnaireService.findById(id);
+        if (questionnaire.isChangeable()) {
+            questionnaireService.update(id, newQuestionnaire);
+        }
         return "redirect:/questionnaires";
     }
 

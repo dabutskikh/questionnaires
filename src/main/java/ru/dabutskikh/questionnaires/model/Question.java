@@ -77,12 +77,9 @@ public class Question {
         this.answers = answers;
     }
 
-//    @PreRemove
-//    private void removeAnswers() {
-//        for (Answer answer : answers) {
-//            u.getEducationses().remove(this);
-//        }
-//    }
+    public boolean isChangeable() {
+        return questionnaire.isChangeable();
+    }
 
     @Override
     public String toString() {

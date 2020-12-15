@@ -78,6 +78,10 @@ public class Questionnaire {
         this.questions = questions;
     }
 
+    public boolean isChangeable() {
+        return status.equals(QuestionnaireStatus.CREATED);
+    }
+
     @Override
     public String toString() {
         return "Questionnaire{" +
