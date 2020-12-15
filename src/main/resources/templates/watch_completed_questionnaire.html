@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Watch questionnaire</title>
+</head>
+<body>
+<div>
+    <h2 th:text="'Watch answers: ' + ${questionnaire.name}"/>
+    <ul>
+        <li th:each="question : ${questionnaire.questions}">
+            <div>
+                <p th:text="${question.name}"></p>
+                <ul>
+                    <th:block th:each="answer : ${question.answers}">
+                        <th:block th:if="${userAnswers.contains(answer)}">
+                            <li th:text="${answer.name}"/>
+                        </th:block>
+                    </th:block>
+                </ul>
+            </div>
+            <hr>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
