@@ -1,6 +1,7 @@
 package ru.dabutskikh.questionnaires.service.interfaces;
 
 import ru.dabutskikh.questionnaires.model.Answer;
+import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.User;
 
 import java.util.Set;
@@ -14,4 +15,6 @@ public interface UserService {
     User findByLogin(String login);
 
     void deleteAnswers(User user);
+
+    Set<Answer> getQuestionnaireAnswers(User user, Questionnaire questionnaire);
 }
