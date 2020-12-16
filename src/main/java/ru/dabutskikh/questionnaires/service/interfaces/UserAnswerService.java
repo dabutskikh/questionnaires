@@ -15,5 +15,5 @@ public interface UserAnswerService {
 
     Set<UserAnswer> toUserAnswers(User user, List<Answer> answers);
 
-    UserAnswer findByUserIdAndAnswerId(Long userId, Long answerId);
+    void customDelete(Long userId, Long answerId);
 }

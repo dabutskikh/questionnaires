@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.User;
+import ru.dabutskikh.questionnaires.model.UserAnswer;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
+import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 import java.util.Set;
@@ -19,6 +21,9 @@ public class ServiceController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserAnswerService userAnswerService;
 
     @Autowired
     QuestionnaireService questionnaireService;
@@ -49,7 +54,7 @@ public class ServiceController {
         if (!completedQuestionnaires.contains(questionnaire)) {
             return "redirect:/history";
         }
-        model.addAttribute("userAnswers", userService.getQuestionnaireAnswers(user, questionnaire));
+        model.addAttribute("usersAnswers", userAnswerService.getUserAnswersToQuestionnaire(user, questionnaire));
         model.addAttribute("questionnaire", questionnaire);
         return "watch_completed_questionnaire";
     }

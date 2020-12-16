@@ -26,8 +26,8 @@ public class Answer {
     )
     private Set<UserAnswer> userAnswers;
 
-    @ManyToMany(mappedBy = "answers")
-    private Set<User> users;
+//    @ManyToMany(mappedBy = "answers")
+//    private Set<User> users;
 
     public Answer() {
     }
@@ -69,14 +69,6 @@ public class Answer {
         this.userAnswers = userAnswers;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     public boolean isChangeable() {
         return question.isChangeable();
     }
@@ -101,13 +93,4 @@ public class Answer {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-    //    @Override
-//    public String toString() {
-//        return "Answer{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", question=" + question +
-//                '}';
-//    }
 }

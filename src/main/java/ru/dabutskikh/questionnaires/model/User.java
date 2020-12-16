@@ -40,9 +40,6 @@ public class User {
     )
     private Set<UserAnswer> userAnswers = new HashSet<>();
 
-    @ManyToMany
-    private Set<Answer> answers = new HashSet<>();
-
     public User() {
     }
 
@@ -100,14 +97,6 @@ public class User {
         this.questionnaires = questionnaires;
     }
 
-    public Set<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<Answer> answers) {
-        this.answers = answers;
-    }
-
     public Set<UserAnswer> getUserAnswers() {
         return userAnswers;
     }
@@ -115,28 +104,6 @@ public class User {
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
     }
-
-    //    public void addAnswers(Set<Answer> answers) {
-//        this.answers.addAll(answers);
-//    }
-
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "answers=" + answers +
-//                '}';
-//    }
-
-    //    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", login='" + login + '\'' +
-//                ", password='" + password + '\'' +
-//                ", role=" + role.name() +
-//                '}';
-//    }
-
 
     @Override
     public boolean equals(Object o) {

@@ -1,6 +1,7 @@
 package ru.dabutskikh.questionnaires.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import ru.dabutskikh.questionnaires.model.*;
 import ru.dabutskikh.questionnaires.repository.UserAnswerRepository;
@@ -35,8 +36,6 @@ public class UserAnswerServiceImpl implements UserAnswerService {
 
     @Override
     public Set<UserAnswer> getUserAnswersToQuestion(User user, Question question) {
-//        System.out.println(question);
-//        System.out.println(question.getAnswers());
         Set<UserAnswer> result = new HashSet<>();
         Set<Answer> questionAnswers = new HashSet<>(question.getAnswers());
 
@@ -48,9 +47,22 @@ public class UserAnswerServiceImpl implements UserAnswerService {
         return result;
     }
 
+    public void customDelete(Long userId, Long answerId) {
+        userAnswerRepository.customDelete(userId, answerId);
+    }
+
     @Override
+    @Modifying
     public void replaceQuestionUserAnswers(User user, Question question, Set<UserAnswer> newAnswers) {
-        userAnswerRepository.deleteAll(getUserAnswersToQuestion(user, question));
+
+        userAnswerRepository.findAll().stream()
+                .filter(userAnswer
+                        -> getUserAnswersToQuestion(user, question).contains(userAnswer)
+                        && !newAnswers.contains(userAnswer)
+                )
+                .forEach(userAnswer
+                        -> customDelete(user.getId(), userAnswer.getUserAnswerId().getAnswer().getId())
+        );
         userAnswerRepository.saveAll(newAnswers);
     }
 
@@ -66,10 +78,5 @@ public class UserAnswerServiceImpl implements UserAnswerService {
                 )
         );
         return result;
-    }
-
-    @Override
-    public UserAnswer findByUserIdAndAnswerId(Long userId, Long answerId) {
-        return userAnswerRepository.findByUserIdAndAnswerId(userId, answerId).get(0);
     }
 }

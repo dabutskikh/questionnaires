@@ -63,32 +63,14 @@ public class UserQuestionnaireController {
                               @RequestParam("question") int idxQuestion,
                               @ModelAttribute User userForm) {
 
-        System.out.println("GABELLA");
         User user = userService.findByLogin(currentUser.getUsername());
 
         Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
         Question question = questionnaire.getQuestions().get(idxQuestion - 1);
 
-        userAnswerService.replaceQuestionUserAnswers(user, question, userForm.getUserAnswers());
+        System.out.println(userForm.getUserAnswers());
 
-        //userService.replaceQuestionAnswers(user, question, userForm.getAnswers());
+        userAnswerService.replaceQuestionUserAnswers(user, question, userForm.getUserAnswers());
         return "redirect:/questionnaire/" + questionnaireId + "?question=" + idxQuestion;
     }
-
-//    @GetMapping("/questionnaire/{id}")
-//    public String getQuestionnaire(Model model,
-//                                   @PathVariable Long id) {
-//
-//        model.addAttribute("user", new User());
-//        model.addAttribute("questionnaire", questionnaireService.findById(id));
-//        return "questionnaire";
-//    }
-//
-//    @PostMapping("/questionnaire")
-//    public String postQuestionnaire(@ModelAttribute("user") User user,
-//                                    @AuthenticationPrincipal UserDetails currentUserDetails) {
-//        User currentUser = userService.findByLogin(currentUserDetails.getUsername());
-//        userService.addAnswers(currentUser, user.getAnswers());
-//        return "redirect:/";
-//    }
 }

@@ -73,8 +73,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Override
     public Set<Questionnaire> getCompletedQuestionnaires(User user) {
         Set<Questionnaire> result = new HashSet<>();
-        user.getAnswers().forEach(
-                answer -> result.add(answer.getQuestion().getQuestionnaire())
+        user.getUserAnswers().forEach(
+                userAnswer -> result.add(
+                        userAnswer
+                        .getUserAnswerId()
+                        .getAnswer()
+                        .getQuestion()
+                        .getQuestionnaire()
+                )
         );
         return result;
     }
