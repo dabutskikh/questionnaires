@@ -28,7 +28,7 @@
            th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"
            th:text="Next"/>
     </form>
-    <form th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
+    <form th:method="POST" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
         <button>Finish</button>
     </form>
 </div>
