@@ -15,6 +15,7 @@ import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,7 @@ public class ServiceController {
     public String getCompletedQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
+        System.out.println(questionnaireService.getCompletedQuestionnaires(user));
         model.addAttribute("qustionnaires", questionnaireService.getCompletedQuestionnaires(user));
         return "completed_questionnaires";
     }

@@ -1,10 +1,7 @@
 package ru.dabutskikh.questionnaires.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "client")
@@ -39,7 +36,7 @@ public class User {
             mappedBy = "userAnswerId.user",
             cascade = CascadeType.ALL
     )
-    private Set<UserAnswer> userAnswers = new HashSet<>();
+    private Set<UserAnswer> userAnswers = new TreeSet<>();
 
     public User() {
     }

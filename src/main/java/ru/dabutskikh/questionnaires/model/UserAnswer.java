@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "client_answer")
-public class UserAnswer {
+public class UserAnswer implements Comparable<UserAnswer> {
     @Embeddable
     public static class UserAnswerId implements Serializable {
         @ManyToOne
@@ -86,6 +86,11 @@ public class UserAnswer {
 
     public void setStatus(UserAnswerStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public int compareTo(UserAnswer o) {
+        return (int) (this.getUserAnswerId().getAnswer().getId() - o.getUserAnswerId().getAnswer().getId());
     }
 
     @Override

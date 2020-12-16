@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "questionnaire")
-public class Questionnaire {
+public class Questionnaire implements Comparable<Questionnaire> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,14 +83,8 @@ public class Questionnaire {
         return status.equals(QuestionnaireStatus.CREATED);
     }
 
-//    @Override
-//    public String toString() {
-//        return "Questionnaire{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", status=" + status +
-//                ", author=" + author +
-//                ", questions=" + questions +
-//                '}';
-//    }
+    @Override
+    public int compareTo(Questionnaire o) {
+        return (int) (this.getId() - o.getId());
+    }
 }

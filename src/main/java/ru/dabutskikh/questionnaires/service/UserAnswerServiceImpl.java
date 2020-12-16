@@ -10,6 +10,7 @@ import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 public class UserAnswerServiceImpl implements UserAnswerService {
@@ -19,7 +20,7 @@ public class UserAnswerServiceImpl implements UserAnswerService {
 
     @Override
     public Set<UserAnswer> getUserAnswersToQuestionnaire(User user, Questionnaire questionnaire) {
-        Set<UserAnswer> result = new HashSet<>();
+        Set<UserAnswer> result = new TreeSet<>();
         Set<Answer> questionnaireAnswers = new HashSet<>();
 
         questionnaire.getQuestions().stream()
@@ -68,7 +69,7 @@ public class UserAnswerServiceImpl implements UserAnswerService {
 
     @Override
     public Set<UserAnswer> toUserAnswers(User user, List<Answer> answers) {
-        Set<UserAnswer> result = new HashSet<>();
+        Set<UserAnswer> result = new TreeSet<>();
         answers.forEach(answer
                 -> result.add(
                         new UserAnswer(

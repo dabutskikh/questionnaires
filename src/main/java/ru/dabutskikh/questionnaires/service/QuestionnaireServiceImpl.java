@@ -71,9 +71,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public Set<Questionnaire> getCompletedQuestionnaires(User user) {
-        Set<Questionnaire> result = new HashSet<>();
+        Set<Questionnaire> set = new TreeSet<>();
         user.getUserAnswers().forEach(
-                userAnswer -> result.add(
+                userAnswer -> set.add(
                         userAnswer
                         .getUserAnswerId()
                         .getAnswer()
@@ -81,18 +81,19 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
                         .getQuestionnaire()
                 )
         );
-        return result;
+
+        return set;
     }
 
     @Override
     public Set<Questionnaire> getAvailableQuestionnaires(User user) {
-        Set<Questionnaire> result = new HashSet<>();
+        Set<Questionnaire> set = new TreeSet<>();
         List<Questionnaire> allQuestionnaires = findAll();
         allQuestionnaires.stream()
                 .filter(questionnaire ->
                         questionnaire.getStatus().equals(QuestionnaireStatus.PUBLISHED)
                                 && !getCompletedQuestionnaires(user).contains(questionnaire))
-                .forEach(result::add);
-        return result;
+                .forEach(set::add);
+        return set;
     }
 }

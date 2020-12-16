@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "answer")
@@ -25,10 +26,7 @@ public class Answer {
             cascade = CascadeType.ALL
     )
     @OrderBy(value = "userAnswerId.answer.id")
-    private Set<UserAnswer> userAnswers;
-
-//    @ManyToMany(mappedBy = "answers")
-//    private Set<User> users;
+    private Set<UserAnswer> userAnswers = new TreeSet<>();
 
     public Answer() {
     }
