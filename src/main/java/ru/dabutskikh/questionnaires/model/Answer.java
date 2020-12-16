@@ -2,6 +2,7 @@ package ru.dabutskikh.questionnaires.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -80,7 +81,28 @@ public class Answer {
         return question.isChangeable();
     }
 
-//    @Override
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Answer answer = (Answer) o;
+        return Objects.equals(id, answer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    //    @Override
 //    public String toString() {
 //        return "Answer{" +
 //                "id=" + id +

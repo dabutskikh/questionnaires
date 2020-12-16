@@ -9,17 +9,19 @@
     <h2 th:text="${questionnaire.name}"/>
     <h2 th:text="'№' + ${idxQuestion} + ': ' + ${question.name}"/>
     <form th:method="POST"
-          th:action="@{/questionaire/{id_questionnaire}(questionnaire_id=${questionnaire.id},
-                question=${idxQuestion})}"
+          th:action="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion})}"
           th:object="${userForm}">
         <ul>
-            <li th:each="answer : ${question.answers}">
+            <li th:each="userAnswer, stat : ${userAnswerOptions}">
                 <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
-                       th:field="*{answers}"
-                       th:value="${answer.id}"
+                       th:field="*{userAnswers}"
+                       th:text="${userAnswer.userAnswerId.answer.name}"
+                       th:value="${userId} + '_' + ${userAnswer.userAnswerId.answer.id}"
                 >
+                <th:block th:if="${userForm.userAnswers.contains(userAnswer)}" th:text="'(selected early)'"></th:block>
             </li>
         </ul>
+        <button type="submit">Save</button>
     </form>
 </div>
 </body>

@@ -1,9 +1,6 @@
 package ru.dabutskikh.questionnaires.service.interfaces;
 
-import ru.dabutskikh.questionnaires.model.Answer;
-import ru.dabutskikh.questionnaires.model.Question;
-import ru.dabutskikh.questionnaires.model.Questionnaire;
-import ru.dabutskikh.questionnaires.model.User;
+import ru.dabutskikh.questionnaires.model.*;
 
 import java.util.Set;
 
@@ -15,11 +12,19 @@ public interface UserService {
 
     User findByLogin(String login);
 
+    User findById(Long id);
+
     void deleteAnswers(User user);
 
-    Set<Answer> getQuestionnaireAnswers(User user, Questionnaire questionnaire);
+    Set<UserAnswer> getUserAnswersToQuestionnaire(User user, Questionnaire questionnaire);
 
-    Set<Answer> getQuestionAnswers(User user, Question question);
+    Set<UserAnswer> getUserAnswersToQuestion(User user, Question question);
 
-    void replaceQuestionAnswers(User user, Question question, Set<Answer> newAnswers);
+    void replaceQuestionUserAnswers(User user, Question question, Set<UserAnswer> newAnswers);
+
+    Set<Answer> getQuestionnaireAnswers(User user, Questionnaire questionnaire); //old
+
+    Set<Answer> getQuestionAnswers(User user, Question question); //old
+
+    void replaceQuestionAnswers(User user, Question question, Set<Answer> newAnswers); //old
 }

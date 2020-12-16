@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "client_answer")
 public class UserAnswer {
     @Embeddable
-    static class UserAnswerId implements Serializable {
+    public static class UserAnswerId implements Serializable {
         @ManyToOne
         @JoinColumn(name = "client_id")
         private User user;
@@ -86,5 +86,28 @@ public class UserAnswer {
 
     public void setStatus(UserAnswerStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAnswer that = (UserAnswer) o;
+        return Objects.equals(userAnswerId, that.userAnswerId) &&
+                status == that.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userAnswerId, status);
+    }
+
+    @Override
+    public String toString() {
+        return "UserAnswer{" +
+                "userId=" + userAnswerId.getUser() +
+                ", answerId=" + userAnswerId.getAnswer() +
+                ", status=" + status +
+                '}';
     }
 }

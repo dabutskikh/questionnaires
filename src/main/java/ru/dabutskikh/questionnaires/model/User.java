@@ -3,6 +3,7 @@ package ru.dabutskikh.questionnaires.model;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -37,7 +38,7 @@ public class User {
             mappedBy = "userAnswerId.user",
             cascade = CascadeType.ALL
     )
-    private Set<UserAnswer> userAnswers;
+    private Set<UserAnswer> userAnswers = new HashSet<>();
 
     @ManyToMany
     private Set<Answer> answers = new HashSet<>();
@@ -135,4 +136,25 @@ public class User {
 //                ", role=" + role.name() +
 //                '}';
 //    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                '}';
+    }
 }

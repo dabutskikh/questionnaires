@@ -89,4 +89,12 @@ public class Question {
 //                ", questionnaire=" + questionnaire +
 //                '}';
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                '}';
+    }
 }
