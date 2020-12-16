@@ -33,6 +33,12 @@ public class User {
     )
     private List<Questionnaire> questionnaires;
 
+    @OneToMany(
+            mappedBy = "userAnswerId.user",
+            cascade = CascadeType.ALL
+    )
+    private Set<UserAnswer> userAnswers;
+
     @ManyToMany
     private Set<Answer> answers = new HashSet<>();
 
@@ -101,7 +107,15 @@ public class User {
         this.answers = answers;
     }
 
-//    public void addAnswers(Set<Answer> answers) {
+    public Set<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(Set<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
+
+    //    public void addAnswers(Set<Answer> answers) {
 //        this.answers.addAll(answers);
 //    }
 

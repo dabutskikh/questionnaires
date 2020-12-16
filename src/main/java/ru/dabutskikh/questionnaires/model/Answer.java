@@ -19,6 +19,12 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
+    @OneToMany(
+            mappedBy = "userAnswerId.answer",
+            cascade = CascadeType.ALL
+    )
+    private Set<UserAnswer> userAnswers;
+
     @ManyToMany(mappedBy = "answers")
     private Set<User> users;
 
@@ -52,6 +58,14 @@ public class Answer {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public Set<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
+
+    public void setUserAnswers(Set<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 
     public Set<User> getUsers() {
