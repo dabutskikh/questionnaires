@@ -37,7 +37,7 @@ public class UserAnswerServiceImpl implements UserAnswerService {
 
     @Override
     public Set<UserAnswer> getUserAnswersToQuestion(User user, Question question) {
-        Set<UserAnswer> result = new HashSet<>();
+        Set<UserAnswer> result = new TreeSet<>();
         Set<Answer> questionAnswers = new HashSet<>(question.getAnswers());
 
         user.getUserAnswers().stream()
