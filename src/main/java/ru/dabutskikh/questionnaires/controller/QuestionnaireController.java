@@ -6,10 +6,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.dabutskikh.questionnaires.model.Answer;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
+import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
+import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/questionnaires")
@@ -20,6 +26,9 @@ public class QuestionnaireController {
 
     @Autowired
     QuestionnaireService questionnaireService;
+
+    @Autowired
+    UserAnswerService userAnswerService;
 
     @GetMapping
     public String getAllQuestionnaires(Model model) {
@@ -80,5 +89,35 @@ public class QuestionnaireController {
                 break;
         }
         return "redirect:/questionnaires";
+    }
+
+    @GetMapping("/{id}/users")
+    public String showAllAnsweredUsers(@PathVariable Long id,
+                                      Model model) {
+        Questionnaire questionnaire = questionnaireService.findById(id);
+        model.addAttribute("users", userService.getAnsweredUser(questionnaire));
+        model.addAttribute("questionnaire_id", id);
+        return "show_answered_users";
+    }
+
+    @PostMapping("/answers")
+    public String showUserAnswers(@RequestParam("questionnaire_id") Long id,
+                                  @RequestParam("login") String login,
+                                  Model model) {
+        User user = userService.findByLogin(login);
+        Questionnaire questionnaire = questionnaireService.findById(id);
+
+        Set<Answer> userAnswers = userAnswerService
+                .getUserAnswersToQuestionnaire(user, questionnaire).stream()
+                .map(userAnswer -> userAnswer.getUserAnswerId().getAnswer())
+                .collect(Collectors.toSet());
+
+        model.addAttribute("user", user);
+        model.addAttribute("userAnswers", userAnswers);
+        model.addAttribute("questionnaire", questionnaire);
+
+        return "show_user_answers";
+
+
     }
 }

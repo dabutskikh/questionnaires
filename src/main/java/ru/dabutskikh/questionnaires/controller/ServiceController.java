@@ -43,7 +43,6 @@ public class ServiceController {
     public String getCompletedQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
-        System.out.println(questionnaireService.getCompletedQuestionnaires(user));
         model.addAttribute("qustionnaires", questionnaireService.getCompletedQuestionnaires(user));
         return "completed_questionnaires";
     }
@@ -55,6 +54,7 @@ public class ServiceController {
         User user = userService.findByLogin(currentUser.getUsername());
         Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
         Set<Questionnaire> completedQuestionnaires = questionnaireService.getCompletedQuestionnaires(user);
+
         if (!completedQuestionnaires.contains(questionnaire)) {
             return "redirect:/history";
         }

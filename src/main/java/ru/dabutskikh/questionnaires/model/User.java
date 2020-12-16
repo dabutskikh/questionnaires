@@ -5,7 +5,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "client")
-public class User {
+public class User implements Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +101,11 @@ public class User {
 
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return (int) (this.getId() - o.getId());
     }
 
     @Override
