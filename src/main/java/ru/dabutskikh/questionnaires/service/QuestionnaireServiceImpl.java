@@ -34,7 +34,6 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Override
     public void update(Long id, Questionnaire questionnaire) {
         Questionnaire newQuestionnaire = findById(id);
-        System.out.println(newQuestionnaire);
         newQuestionnaire.setName(questionnaire.getName());
         save(newQuestionnaire);
     }

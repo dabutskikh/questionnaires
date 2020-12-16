@@ -26,6 +26,7 @@ public class Question {
             orphanRemoval = true,
             mappedBy = "question"
     )
+    @OrderBy
     private List<Answer> answers;
 
     public Question() {

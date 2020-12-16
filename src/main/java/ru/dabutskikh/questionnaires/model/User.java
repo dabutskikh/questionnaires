@@ -32,6 +32,7 @@ public class User {
             mappedBy = "author",
             orphanRemoval = true
     )
+    @OrderBy
     private List<Questionnaire> questionnaires;
 
     @OneToMany(

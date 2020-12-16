@@ -11,7 +11,7 @@
     <table>
         <tr th:each="questionnaire : ${qustionnaires}">
             <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/questionnaire/{id}(id=${questionnaire.id})}" th:text="Go"></a></td>
+            <td><a th:href="@{/questionnaire/{id}(id=${questionnaire.id}, question=1)}" th:text="Go"></a></td>
         </tr>
     </table>
 </div>

@@ -24,6 +24,7 @@ public class Answer {
             mappedBy = "userAnswerId.answer",
             cascade = CascadeType.ALL
     )
+    @OrderBy(value = "userAnswerId.answer.id")
     private Set<UserAnswer> userAnswers;
 
 //    @ManyToMany(mappedBy = "answers")
