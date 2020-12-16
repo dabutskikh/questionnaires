@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.dabutskikh.questionnaires.model.Answer;
 import ru.dabutskikh.questionnaires.model.Questionnaire;
 import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.model.UserAnswer;
@@ -15,6 +16,7 @@ import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class ServiceController {
@@ -54,7 +56,13 @@ public class ServiceController {
         if (!completedQuestionnaires.contains(questionnaire)) {
             return "redirect:/history";
         }
-        model.addAttribute("usersAnswers", userAnswerService.getUserAnswersToQuestionnaire(user, questionnaire));
+
+        Set<Answer> userAnswers = userAnswerService
+                .getUserAnswersToQuestionnaire(user, questionnaire).stream()
+                .map(userAnswer -> userAnswer.getUserAnswerId().getAnswer())
+                .collect(Collectors.toSet());
+
+        model.addAttribute("userAnswers", userAnswers);
         model.addAttribute("questionnaire", questionnaire);
         return "watch_completed_questionnaire";
     }
