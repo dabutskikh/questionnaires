@@ -80,4 +80,10 @@ public class UserAnswerServiceImpl implements UserAnswerService {
         );
         return result;
     }
+
+    @Override
+    public void setFinalStatus(Set<UserAnswer> userAnswers) {
+        userAnswers.forEach(userAnswer -> userAnswer.setStatus(UserAnswerStatus.FINAL));
+        userAnswerRepository.saveAll(userAnswers);
+    }
 }

@@ -73,4 +73,19 @@ public class UserQuestionnaireController {
         userAnswerService.replaceQuestionUserAnswers(user, question, userForm.getUserAnswers());
         return "redirect:/questionnaire/" + questionnaireId + "?question=" + idxQuestion;
     }
+
+    @PostMapping("/questionnaire/{id}/save")
+    public String completeQuestionnaire(@AuthenticationPrincipal UserDetails currentUser,
+                                        @PathVariable Long id) {
+        User user = userService.findByLogin(currentUser.getUsername());
+        Questionnaire questionnaire = questionnaireService.findById(id);
+        for (int i = 0; i < questionnaire.getQuestions().size(); i++) {
+            Question currentQuestion = questionnaire.getQuestions().get(i);
+            if (userAnswerService.getUserAnswersToQuestion(user, currentQuestion).size() == 0) {
+                return "redirect:/questionnaire/" + id + "?question=" + (i + 1);
+            }
+        }
+        userAnswerService.setFinalStatus(userAnswerService.getUserAnswersToQuestionnaire(user, questionnaire));
+        return "redirect:/history";
+    }
 }

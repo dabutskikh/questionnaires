@@ -16,4 +16,6 @@ public interface UserAnswerService {
     Set<UserAnswer> toUserAnswers(User user, List<Answer> answers);
 
     void customDelete(Long userId, Long answerId);
+
+    void setFinalStatus(Set<UserAnswer> userAnswers);
 }
