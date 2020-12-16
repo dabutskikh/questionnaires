@@ -18,10 +18,18 @@
                        th:text="${userAnswer.userAnswerId.answer.name}"
                        th:value="${userId} + '_' + ${userAnswer.userAnswerId.answer.id}"
                 >
-                <th:block th:if="${userForm.userAnswers.contains(userAnswer)}" th:text="'(selected early)'"></th:block>
             </li>
         </ul>
+        <a th:if="${idxQuestion} > 1"
+           th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} - 1)}"
+           th:text="Prev"/>
         <button type="submit">Save</button>
+        <a th:if="${idxQuestion} != ${questionnaire.questions.size()}"
+           th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"
+           th:text="Next"/>
+    </form>
+    <form th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
+        <button>Finish</button>
     </form>
 </div>
 </body>
