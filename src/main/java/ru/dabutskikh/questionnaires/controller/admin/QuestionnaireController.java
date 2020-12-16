@@ -1,6 +1,7 @@
-package ru.dabutskikh.questionnaires.controller;
+package ru.dabutskikh.questionnaires.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
+@PreAuthorize("hasAuthority('questionnaires:write')")
 @RequestMapping("/questionnaires")
 public class QuestionnaireController {
 
