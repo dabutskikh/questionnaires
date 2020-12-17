@@ -1,28 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>User's answers</title>
-</head>
+<head th:replace="base::common_header('Ответы пользователя')"></head>
 <body>
-<div>
-    <h2 th:text="'Questionnaire: ' + ${questionnaire.name}"/>
-    <h3 th:text="'User: ' + ${user.login}"></h3>
-    <ul>
-        <li th:each="question : ${questionnaire.questions}">
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div>
+            <h2 th:text="${questionnaire.name} + ' (ответы ' + ${user.login} + ')'"></h2>
             <div>
-                <p th:text="${question.name}"></p>
+                <a th:href="@{/admin/questionnaires/{id}/users(id=${questionnaire.id})}">К ответившим</a>
+            </div>
+            <div>
                 <ul>
-                    <th:block th:each="answer : ${question.answers}">
-                        <th:block th:if="${userAnswers.contains(answer)}">
-                            <li th:text="${answer.name}"/>
-                        </th:block>
-                    </th:block>
+                    <li th:each="question : ${questionnaire.questions}">
+                        <p th:text="question.name"></p>
+                        <ul>
+                            <th:block th:each="answer : ${question.answers}">
+                                <th:block th:if="${userAnswers.contains(answer)}">
+                                    <li th:text="${answer.name}"/>
+                                </th:block>
+                            </th:block>
+                        </ul>
+                    </li>
                 </ul>
             </div>
-            <hr>
-        </li>
-    </ul>
-</div>
+<!--            <div>-->
+<!--                <form th:method="patch" th:action="@{/admin/answers/{id}(id=${answerForm.id})}" th:object="${answerForm}">-->
+<!--                    <div>-->
+<!--                        <label for="name">Ответ</label>-->
+<!--                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Формулировка" required>-->
+<!--                    </div>-->
+<!--                    <button type="submit">Создать</button>-->
+<!--                </form>-->
+<!--            </div>-->
+        </div>
+    </div>
+<!--<div>-->
+
+<!--    <h2 th:text="'Questionnaire: ' + ${questionnaire.name}"/>-->
+<!--    <h3 th:text="'User: ' + ${user.login}"></h3>-->
+<!--    <ul>-->
+<!--        <li th:each="question : ${questionnaire.questions}">-->
+<!--            <div>-->
+<!--                <p th:text="${question.name}"></p>-->
+<!--                <ul>-->
+<!--                    <th:block th:each="answer : ${question.answers}">-->
+<!--                        <th:block th:if="${userAnswers.contains(answer)}">-->
+<!--                            <li th:text="${answer.name}"/>-->
+<!--                        </th:block>-->
+<!--                    </th:block>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--            <hr>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
 </body>
 </html>

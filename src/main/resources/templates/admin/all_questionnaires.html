@@ -1,29 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>All questionnaires</title>
-</head>
+<head th:replace="base::common_header('Анкеты')"></head>
 <body>
-<div>
-    <h2>All questionnaires</h2>
-    <table>
-        <tr th:each="questionnaire : ${questionnaires}">
-            <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/admin/questionnaires/{id}/edit(id=${questionnaire.id})}" th:text="Edit"></a></td>
-            <td><a th:href="@{/admin/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
-            <td>
-                <form th:method="DELETE" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}">
-                    <th:block th:switch="${questionnaire.status.name()}">
-                        <button th:case="'CREATED'">Publish</button>
-                        <button th:case="'PUBLISHED'">Hide</button>
-                        <button th:case="'HIDDEN'">Show</button>
-                    </th:block>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <a href="/admin/questionnaires/new">Add</a>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div class="container">
+            <h2>Все анкеты</h2>
+            <div>
+                <div th:each="questionnaire : ${questionnaires}"  class="row m-2">
+                    <span th:text="${questionnaire.name}" class="col-md-2"></span>
+                    <span class="col-md-2">
+                        <th:block th:switch="${questionnaire.isChangeable()}">
+<!--                            <a class="disabled" th:href="@{/admin/questionnaires/{id}/edit(id=${questionnaire.id})}">Редактировать</a>-->
+                        </th:block>
+                    </span>
+                    <span class="col-md-2"><a th:href="@{/admin/questions(questionnaire_id=${questionnaire.id})}">Вопросы</a></span>
+                    <span class="col-md-2"><a th:href="@{/admin/questionnaires/{id}/users(id=${questionnaire.id})}">Список ответивших</a></span>
+                    <form th:method="delete" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}" class="col-md-2">
+                        <th:block th:switch="${questionnaire.isValid()}">
+                            <th:block th:case="true">
+                                <th:block th:switch="${questionnaire.status.name()}" class="btn btn-primary btn-block">
+                                    <button th:case="'CREATED'" class="btn btn-primary btn-block">Опубликовать</button>
+                                    <button th:case="'PUBLISHED'" class="btn btn-primary btn-block">Закрыть доступ</button>
+                                    <button th:case="'HIDDEN'" class="btn btn-primary btn-block">Открыть доступ</button>
+                                </th:block>
+                            </th:block>
+                            <th:block th:case="false">
+                                <span class="text-danger">Не валидна</span>
+                            </th:block>
+                        </th:block>
+
+<!--                        <th:block th:if="not ${questionnaire.isValid()}">-->
+<!--                            <span class="text-danger">Не валидна</span>-->
+<!--                        </th:block>-->
+<!--                        <th:block th:un></th:block>-->
+
+<!--                        <th:block th:switch="${questionnaire.status.name()}" class="btn btn-primary btn-block">-->
+
+<!--                            <button th:case="'CREATED'" class="btn btn-primary btn-block">Опубликовать</button>-->
+<!--                            <button th:case="'PUBLISHED'" class="btn btn-primary btn-block">Закрыть доступ</button>-->
+<!--                            <button th:case="'HIDDEN'" class="btn btn-primary btn-block">Открыть доступ</button>-->
+<!--                        </th:block>-->
+                    </form>
+                </div>
+            </div>
+            <div class="row m-2">
+                <a class="col-md-2" href="/admin/questionnaires/new">Создать анкету</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+            crossorigin="anonymous"></script>
 </body>
 </html>

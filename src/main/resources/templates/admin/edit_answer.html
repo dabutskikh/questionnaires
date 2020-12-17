@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit answer name</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::common_header('Ответ')"></head>
 <body>
-<div>
-    <h2>Edit answer name</h2>
-    <a th:href="@{/admin/answers(question_id=${answer.question.id})}">Back</a>
-    <form th:method="PATCH" th:action="@{/admin/answers/{id}(id=${answer.id})}" th:object="${answer}">
-        <p>
-            <label for="name">New name</label>
-            <input type="text" th:field="*{name}" id="name" name="name" placeholder="New name" required>
-        </p>
-        <button type="submit">Edit</button>
-    </form>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div>
+            <h2 th:text="'Редактирание формулировки ответа (вопрос: ' + ${answer.question.name} + ')'"></h2>
+            <div>
+                <a th:href="@{/admin/answers(question_id=${answer.question.id})}">К списку ответов</a>
+            </div>
+            <div>
+                <form th:method="patch" th:action="@{/admin/answers/{id}(id=${answer.id})}" th:object="${answer}">
+                    <div>
+                        <label for="name">Ответ</label>
+                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Новая формулировка" required>
+                    </div>
+                    <button type="submit">Редактировать</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

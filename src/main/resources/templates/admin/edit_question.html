@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit question name</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::common_header('Вопрос')"></head>
 <body>
-<div>
-    <h2>Edit question name</h2>
-    <a th:href="@{/admin/questions(questionnaire_id=${question.questionnaire.id})}">Back</a>
-    <form th:method="PATCH" th:action="@{/admin/questions/{id}(id=${question.id})}" th:object="${question}">
-        <p>
-            <label for="name">New name</label>
-            <input type="text" th:field="*{name}" id="name" name="name" placeholder="New name" required>
-        </p>
-        <p>
-            <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
-            <label for="is_multiply">is multiply answer</label>
-        </p>
-        <button type="submit">Edit</button>
-    </form>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div class="container">
+            <h2 th:text="'Редактирание формулировки вопроса (анкета: ' + ${question.questionnaire.name} + ')'"></h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/admin/questions(questionnaire_id=${question.questionnaire.id})}">К списку анкет</a></li>
+                </ol>
+            </nav>
+            <div>
+                <form th:method="patch" th:action="@{/admin/questions/{id}(id=${question.id})}" th:object="${question}">
+                    <div>
+                        <label for="name">Вопрос</label>
+                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Новая формулировка" required>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
+                        <label for="is_multiply">несколько вариантов ответа</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Редактировать</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

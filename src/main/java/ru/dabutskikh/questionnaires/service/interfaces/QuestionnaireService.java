@@ -1,6 +1,7 @@
 package ru.dabutskikh.questionnaires.service.interfaces;
 
 import ru.dabutskikh.questionnaires.model.Questionnaire;
+import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
 import ru.dabutskikh.questionnaires.model.User;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public interface QuestionnaireService {
     void save(Questionnaire questionnaire);
 
     void update(Long id, Questionnaire questionnaire);
+
+    void setStatus(Questionnaire questionnaire, QuestionnaireStatus status);
 
     void toPublish(Questionnaire questionnaire);
 

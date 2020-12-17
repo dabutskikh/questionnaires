@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Answers of question</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::common_header('Ответы')"></head>
 <body>
-<div>
-    <h2 th:text="'Answers of question ' + ${parentQuestion.name}"/>
-    <a th:href="@{/admin/questions(questionnaire_id=${parentQuestion.questionnaire.id})}">Back</a>
-    <table>
-        <tr th:each="answer : ${answers}">
-            <td th:text="${answer.name}"></td>
-            <td><a th:href="@{/admin/answers/{id}/edit(id=${answer.id})}" th:text="Edit"></a></td>
-            <td>
-                <form th:method="DELETE" th:action="@{/admin/answers/{id}(id=${answer.id})}">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <a th:href="@{/admin/answers/new(question_id=${parentQuestion.id})}">Add</a>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div>
+            <h2 th:text="'Варианты ответов на вопрос: ' + ${parentQuestion.name}"></h2>
+            <div>
+                <a th:href="@{/admin/questions(questionnaire_id=${parentQuestion.questionnaire.id})}">К вопросу</a>
+            </div>
+            <div>
+                <div th:each="answer : ${answers}">
+                    <span th:text="${answer.name}"></span>
+                    <span><a th:href="@{/admin/answers/{id}/edit(id=${answer.id})}">Редактировать</a></span>
+                    <form th:method="delete" th:action="@{/admin/answers/{id}(id=${answer.id})}" style="display: inline">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </div>
+            </div>
+            <a th:href="@{/admin/answers/new(question_id=${parentQuestion.id})}">Добавить ответ</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -83,6 +83,18 @@ public class Questionnaire implements Comparable<Questionnaire> {
         return status.equals(QuestionnaireStatus.CREATED);
     }
 
+    public boolean isValid() {
+        if (questions.size() == 0) {
+            return false;
+        }
+        for (Question question : questions) {
+            if (question.getAnswers().size() < 2) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public int compareTo(Questionnaire o) {
         return (int) (this.getId() - o.getId());

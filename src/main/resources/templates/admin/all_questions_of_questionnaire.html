@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Questions of questionnaire</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::common_header('Вопросы')"></head>
 <body>
-<div>
-    <h2 th:text="'Questions of questionnaire ' + ${parentQuestionnaire.name}"/>
-    <a href="/admin/questionnaires">Back</a>
-    <table>
-        <tr th:each="question : ${questions}">
-            <td th:text="${question.name}"></td>
-            <td><a th:href="@{/admin/questions/{id}/edit(id=${question.id})}" th:text="Edit"></a></td>
-            <td><a th:href="@{/admin/answers(question_id=${question.id})}" th:text="Answers"></a></td>
-            <td>
-                <form th:method="DELETE" th:action="@{/admin/questions/{id}(id=${question.id})}">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <a th:href="@{/admin/questions/new(questionnaire_id=${parentQuestionnaire.id})}">Add</a>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div>
+            <h2 th:text="'Вопросы к анкете: ' + ${parentQuestionnaire.name}"></h2>
+            <div>
+                <a href="/admin/questionnaires">К анкете</a>
+            </div>
+            <div>
+                <div th:each="question : ${questions}">
+                    <span th:text="${question.name}"></span>
+                    <span><a th:href="@{/admin/questions/{id}/edit(id=${question.id})}">Редактировать</a></span>
+                    <span><a th:href="@{/admin/answers(question_id=${question.id})}" th:text="Ответы"></a></span>
+                    <form th:method="delete" th:action="@{/admin/questions/{id}(id=${question.id})}" style="display: inline">
+                        <button type="submit">Удалить</button>
+                    </form>
+                </div>
+            </div>
+            <a th:href="@{/admin/questions/new(questionnaire_id=${parentQuestionnaire.id})}">Добавить вопрос</a>
+        </div>
+    </div>
 </body>
 </html>

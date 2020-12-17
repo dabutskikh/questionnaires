@@ -12,7 +12,7 @@
             <td th:text="${user.id}"></td>
             <td th:text="${user.login}"></td>
             <td>
-                <form th:method="POST"
+                <form method="post"
                       th:action="@{/admin/questionnaires/answers(questionnaire_id=${questionnaire_id}, login=${user.login})}">
                     <button type="submit">Show answers</button>
                 </form>

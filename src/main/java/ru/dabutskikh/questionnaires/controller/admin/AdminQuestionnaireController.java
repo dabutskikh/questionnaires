@@ -81,13 +81,16 @@ public class AdminQuestionnaireController {
         Questionnaire questionnaire = questionnaireService.findById(id);
         switch (questionnaire.getStatus()){
             case CREATED:
-                questionnaireService.toPublish(questionnaire);
+                questionnaireService.setStatus(questionnaire, QuestionnaireStatus.PUBLISHED);
+//                questionnaireService.toPublish(questionnaire);
                 break;
             case PUBLISHED:
-                questionnaireService.toHide(questionnaire);
+                questionnaireService.setStatus(questionnaire, QuestionnaireStatus.HIDDEN);
+//                questionnaireService.toHide(questionnaire);
                 break;
             case HIDDEN:
-                questionnaireService.toShow(questionnaire);
+                questionnaireService.setStatus(questionnaire, QuestionnaireStatus.PUBLISHED);
+//                questionnaireService.toShow(questionnaire);
                 break;
         }
         return "redirect:/admin/questionnaires";
