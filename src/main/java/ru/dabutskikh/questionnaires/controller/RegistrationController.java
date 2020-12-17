@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.dabutskikh.questionnaires.model.Role;
 import ru.dabutskikh.questionnaires.model.User;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
@@ -20,7 +21,6 @@ public class RegistrationController {
     @GetMapping
     public String getRegistationPage(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -31,6 +31,9 @@ public class RegistrationController {
         ) {
             return "registration";
         } else {
+            if (userForm.getRole() == null) {
+                userForm.setRole(Role.USER);
+            }
             userService.save(userForm);
             return "redirect:/auth/login";
         }

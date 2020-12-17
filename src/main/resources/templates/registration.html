@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
@@ -20,6 +20,9 @@
             <label for="confirmPassword">Password</label>
             <input type="password" th:field="*{confirmPassword}" id="confirmPassword" name="confirmPassword"
                    placeholder="Confirm password" required>
+        </p>
+        <p>
+            <input type="checkbox" th:text="'is Admin'" th:field="*{role}" th:value="ADMIN">
         </p>
         <button type="submit">Registration</button>
     </form>
