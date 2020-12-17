@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Completed questionnaires</title>
-</head>
+<head th:replace="base::common_header('Отправленные анкеты')"/>
 <body>
 <div>
-    <h2>Completed questionnaires</h2>
-    <a href="#">Back</a>
+    <h2>Отправленные анкеты</h2>
+<!--    <a href="#">Back</a>-->
     <table>
         <tr th:each="questionnaire : ${qustionnaires}">
             <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/watch(questionnaire_id=${questionnaire.id})}" th:text="Watch"></a></td>
+            <td><a th:href="@{/watch(questionnaire_id=${questionnaire.id})}" th:text="'Посмотреть ответы'"></a></td>
         </tr>
     </table>
 </div>

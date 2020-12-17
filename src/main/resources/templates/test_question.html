@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-</head>
+<head th:replace="base::common_header('Анкета')"/>
 <body>
 <div>
     <h2 th:text="${questionnaire.name}"/>
-    <h2 th:text="'№' + ${idxQuestion} + ': ' + ${question.name}"/>
+    <h2 th:text="'Вопрос №' + ${idxQuestion} + ': ' + ${question.name}"/>
     <form th:method="POST"
           th:action="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion})}"
           th:object="${userForm}">
@@ -22,14 +19,14 @@
         </ul>
         <a th:if="${idxQuestion} > 1"
            th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} - 1)}"
-           th:text="Prev"/>
-        <button type="submit">Save</button>
+           th:text="Предыдущий"/>
+        <button type="submit">Сохранить ответ</button>
         <a th:if="${idxQuestion} != ${questionnaire.questions.size()}"
            th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"
-           th:text="Next"/>
+           th:text="Следующий"/>
     </form>
     <form th:method="POST" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
-        <button>Finish</button>
+        <button>Отправить анкету</button>
     </form>
 </div>
 </body>
