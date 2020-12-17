@@ -2,10 +2,7 @@ package ru.dabutskikh.questionnaires.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.dabutskikh.questionnaires.model.Question;
-import ru.dabutskikh.questionnaires.model.Questionnaire;
-import ru.dabutskikh.questionnaires.model.QuestionnaireStatus;
-import ru.dabutskikh.questionnaires.model.User;
+import ru.dabutskikh.questionnaires.model.*;
 import ru.dabutskikh.questionnaires.repository.QuestionnaireRepository;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 
@@ -72,16 +69,38 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     @Override
     public Set<Questionnaire> getCompletedQuestionnaires(User user) {
         Set<Questionnaire> set = new TreeSet<>();
-        user.getUserAnswers().forEach(
-                userAnswer -> set.add(
-                        userAnswer
+        user.getUserAnswers().stream()
+                .filter(userAnswer
+                        -> userAnswer.getStatus()
+                        .equals(UserAnswerStatus.FINAL)
+                )
+                .forEach(userAnswer
+                        -> set.add(userAnswer
                         .getUserAnswerId()
                         .getAnswer()
                         .getQuestion()
                         .getQuestionnaire()
                 )
         );
+        return set;
+    }
 
+    @Override
+    public Set<Questionnaire> getCurrentQuestionnaires(User user) {
+        Set<Questionnaire> set = new TreeSet<>();
+        user.getUserAnswers().stream()
+                .filter(userAnswer
+                        -> userAnswer.getStatus()
+                        .equals(UserAnswerStatus.TEMPORARY)
+                )
+                .forEach(userAnswer
+                                -> set.add(userAnswer
+                                .getUserAnswerId()
+                                .getAnswer()
+                                .getQuestion()
+                                .getQuestionnaire()
+                        )
+                );
         return set;
     }
 
@@ -92,7 +111,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         allQuestionnaires.stream()
                 .filter(questionnaire ->
                         questionnaire.getStatus().equals(QuestionnaireStatus.PUBLISHED)
-                                && !getCompletedQuestionnaires(user).contains(questionnaire))
+                                && !getCompletedQuestionnaires(user).contains(questionnaire)
+                                && !getCurrentQuestionnaires(user).contains(questionnaire)
+                )
                 .forEach(set::add);
         return set;
     }

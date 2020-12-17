@@ -39,6 +39,14 @@ public class ServiceController {
         return "available_questionnaires";
     }
 
+    @GetMapping("/current")
+    public String getCurrentQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
+                                           Model model) {
+        User user = userService.findByLogin(currentUser.getUsername());
+        model.addAttribute("qustionnaires", questionnaireService.getCurrentQuestionnaires(user));
+        return "current_questionnaires";
+    }
+
     @GetMapping("/history")
     public String getCompletedQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {

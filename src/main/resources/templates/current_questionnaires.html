@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Current questionnaires</title>
+</head>
+<body>
+<div>
+    <h2>Current questionnaires</h2>
+    <a href="#">Back</a>
+    <table>
+        <tr th:each="questionnaire : ${qustionnaires}">
+            <td th:text="${questionnaire.name}"></td>
+            <td><a th:href="@{/questionnaire/{id}(id=${questionnaire.id}, question=1)}" th:text="Continue"></a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

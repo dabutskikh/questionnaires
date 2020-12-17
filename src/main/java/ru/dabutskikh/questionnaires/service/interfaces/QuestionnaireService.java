@@ -25,4 +25,6 @@ public interface QuestionnaireService {
     Set<Questionnaire> getCompletedQuestionnaires(User user);
 
     Set<Questionnaire> getAvailableQuestionnaires(User user);
+
+    Set<Questionnaire> getCurrentQuestionnaires(User user);
 }
