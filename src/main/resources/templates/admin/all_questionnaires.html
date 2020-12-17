@@ -10,10 +10,10 @@
     <table>
         <tr th:each="questionnaire : ${questionnaires}">
             <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/questionnaires/{id}/edit(id=${questionnaire.id})}" th:text="Edit"></a></td>
-            <td><a th:href="@{/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
+            <td><a th:href="@{/admin/questionnaires/{id}/edit(id=${questionnaire.id})}" th:text="Edit"></a></td>
+            <td><a th:href="@{/admin/questions(questionnaire_id=${questionnaire.id})}" th:text="Questions"></a></td>
             <td>
-                <form th:method="DELETE" th:action="@{/questionnaires/{id}(id=${questionnaire.id})}">
+                <form th:method="DELETE" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}">
                     <th:block th:switch="${questionnaire.status.name()}">
                         <button th:case="'CREATED'">Publish</button>
                         <button th:case="'PUBLISHED'">Hide</button>
@@ -23,7 +23,7 @@
             </td>
         </tr>
     </table>
-    <a href="/questionnaires/new">Add</a>
+    <a href="/admin/questionnaires/new">Add</a>
 </div>
 </body>
 </html>

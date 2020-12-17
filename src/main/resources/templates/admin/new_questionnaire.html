@@ -7,8 +7,8 @@
 <body>
 <div>
     <h2>New questionnaire</h2>
-    <a href="/questionnaires">Back</a>
-    <form th:method="POST" th:action="@{/questionnaires}" th:object="${questionnaireForm}">
+    <a href="/admin/questionnaires">Back</a>
+    <form th:method="POST" th:action="@{/admin/questionnaires}" th:object="${questionnaireForm}">
         <p>
             <label for="name">Name</label>
             <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>

@@ -7,8 +7,8 @@
 <body>
 <div>
     <h2>Edit answer name</h2>
-    <a th:href="@{/answers(question_id=${answer.question.id})}">Back</a>
-    <form th:method="PATCH" th:action="@{/answers/{id}(id=${answer.id})}" th:object="${answer}">
+    <a th:href="@{/admin/answers(question_id=${answer.question.id})}">Back</a>
+    <form th:method="PATCH" th:action="@{/admin/answers/{id}(id=${answer.id})}" th:object="${answer}">
         <p>
             <label for="name">New name</label>
             <input type="text" th:field="*{name}" id="name" name="name" placeholder="New name" required>

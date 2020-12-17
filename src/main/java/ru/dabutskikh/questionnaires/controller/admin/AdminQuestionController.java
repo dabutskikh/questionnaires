@@ -11,8 +11,8 @@ import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 
 @Controller
 @PreAuthorize("hasAuthority('questionnaires:write')")
-@RequestMapping("/questions")
-public class QuestionController {
+@RequestMapping("/admin/questions")
+public class AdminQuestionController {
 
     @Autowired
     QuestionnaireService questionnaireService;
@@ -29,7 +29,7 @@ public class QuestionController {
         model.addAttribute("questions",
                 questionService.getAllQuestionsByQuestionnaireId(questionnaireId)
         );
-        return "all_questions_of_questionnaire";
+        return "admin/all_questions_of_questionnaire";
     }
 
     @PostMapping
@@ -37,7 +37,7 @@ public class QuestionController {
                                  @RequestParam("questionnaire_id") Long questionnaireId) {
         questionForm.setQuestionnaire(questionnaireService.findById(questionnaireId));
         questionService.save(questionForm);
-        return "redirect:/questions?questionnaire_id=" + questionnaireId;
+        return "redirect:/admin/questions?questionnaire_id=" + questionnaireId;
     }
 
     @GetMapping("/new")
@@ -45,7 +45,7 @@ public class QuestionController {
                                           @RequestParam("questionnaire_id") Long questionnaireId) {
         model.addAttribute("parentQuestionnaire", questionnaireService.findById(questionnaireId));
         model.addAttribute("questionForm", new Question());
-        return "new_question";
+        return "admin/new_question";
     }
 
     @GetMapping("/{id}/edit")
@@ -53,12 +53,12 @@ public class QuestionController {
                                           Model model) {
         Question question = questionService.findById(id);
         if (!question.isChangeable()) {
-            return "redirect:/questions?questionnaire_id="
+            return "redirect:/admin/questions?questionnaire_id="
                     + question.getQuestionnaire().getId();
         }
 
         model.addAttribute("question", question);
-        return "edit_question";
+        return "admin/edit_question";
     }
 
     @PatchMapping("/{id}")
@@ -69,7 +69,7 @@ public class QuestionController {
             questionService.update(id, newQuestion);
         }
 
-        return "redirect:/questions?questionnaire_id="
+        return "redirect:/admin/questions?questionnaire_id="
                 + question.getQuestionnaire().getId();
     }
 
@@ -80,6 +80,6 @@ public class QuestionController {
         if (question.isChangeable()) {
             questionService.delete(id);
         }
-        return "redirect:/questions?questionnaire_id=" + parentQuestionnaireId;
+        return "redirect:/admin/questions?questionnaire_id=" + parentQuestionnaireId;
     }
 }

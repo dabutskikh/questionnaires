@@ -13,7 +13,7 @@
             <td th:text="${user.login}"></td>
             <td>
                 <form th:method="POST"
-                      th:action="@{/questionnaires/answers(questionnaire_id=${questionnaire_id}, login=${user.login})}">
+                      th:action="@{/admin/questionnaires/answers(questionnaire_id=${questionnaire_id}, login=${user.login})}">
                     <button type="submit">Show answers</button>
                 </form>
             </td>

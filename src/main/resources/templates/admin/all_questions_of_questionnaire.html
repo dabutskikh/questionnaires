@@ -7,20 +7,20 @@
 <body>
 <div>
     <h2 th:text="'Questions of questionnaire ' + ${parentQuestionnaire.name}"/>
-    <a href="/questionnaires">Back</a>
+    <a href="/admin/questionnaires">Back</a>
     <table>
         <tr th:each="question : ${questions}">
             <td th:text="${question.name}"></td>
-            <td><a th:href="@{/questions/{id}/edit(id=${question.id})}" th:text="Edit"></a></td>
-            <td><a th:href="@{/answers(question_id=${question.id})}" th:text="Answers"></a></td>
+            <td><a th:href="@{/admin/questions/{id}/edit(id=${question.id})}" th:text="Edit"></a></td>
+            <td><a th:href="@{/admin/answers(question_id=${question.id})}" th:text="Answers"></a></td>
             <td>
-                <form th:method="DELETE" th:action="@{/questions/{id}(id=${question.id})}">
+                <form th:method="DELETE" th:action="@{/admin/questions/{id}(id=${question.id})}">
                     <button type="submit">Delete</button>
                 </form>
             </td>
         </tr>
     </table>
-    <a th:href="@{/questions/new(questionnaire_id=${parentQuestionnaire.id})}">Add</a>
+    <a th:href="@{/admin/questions/new(questionnaire_id=${parentQuestionnaire.id})}">Add</a>
 </div>
 </body>
 </html>

@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 @Controller
 @PreAuthorize("hasAuthority('questionnaires:write')")
-@RequestMapping("/questionnaires")
-public class QuestionnaireController {
+@RequestMapping("/admin/questionnaires")
+public class AdminQuestionnaireController {
 
     @Autowired
     UserService userService;
@@ -35,7 +35,7 @@ public class QuestionnaireController {
     @GetMapping
     public String getAllQuestionnaires(Model model) {
         model.addAttribute("questionnaires", questionnaireService.findAll());
-        return "all_questionnaires";
+        return "admin/all_questionnaires";
     }
 
     @PostMapping
@@ -44,14 +44,14 @@ public class QuestionnaireController {
         questionnaireForm.setAuthor(userService.findByLogin(currentUser.getUsername()));
         questionnaireForm.setStatus(QuestionnaireStatus.CREATED);
         questionnaireService.save(questionnaireForm);
-        return "redirect:/questionnaires";
+        return "redirect:/admin/questionnaires";
     }
 
     @GetMapping("/new")
     public String getCreatingQuestionnairePage(Model model) {
 
         model.addAttribute("questionnaireForm", new Questionnaire());
-        return "new_questionnaire";
+        return "admin/new_questionnaire";
     }
 
     @GetMapping("/{id}/edit")
@@ -59,11 +59,11 @@ public class QuestionnaireController {
                                                Model model) {
         Questionnaire questionnaire = questionnaireService.findById(id);
         if (!questionnaire.isChangeable()) {
-            return "redirect:/questionnaires";
+            return "redirect:/admin/questionnaires";
         }
 
         model.addAttribute("questionnaire", questionnaire);
-        return "edit_questionnaire";
+        return "admin/edit_questionnaire";
     }
 
     @PatchMapping("/{id}")
@@ -73,7 +73,7 @@ public class QuestionnaireController {
         if (questionnaire.isChangeable()) {
             questionnaireService.update(id, newQuestionnaire);
         }
-        return "redirect:/questionnaires";
+        return "redirect:/admin/questionnaires";
     }
 
     @DeleteMapping("/{id}")
@@ -90,7 +90,7 @@ public class QuestionnaireController {
                 questionnaireService.toShow(questionnaire);
                 break;
         }
-        return "redirect:/questionnaires";
+        return "redirect:/admin/questionnaires";
     }
 
     @GetMapping("/{id}/users")
@@ -99,7 +99,7 @@ public class QuestionnaireController {
         Questionnaire questionnaire = questionnaireService.findById(id);
         model.addAttribute("users", userService.getAnsweredUser(questionnaire));
         model.addAttribute("questionnaire_id", id);
-        return "show_answered_users";
+        return "admin/show_answered_users";
     }
 
     @PostMapping("/answers")
@@ -118,7 +118,7 @@ public class QuestionnaireController {
         model.addAttribute("userAnswers", userAnswers);
         model.addAttribute("questionnaire", questionnaire);
 
-        return "show_user_answers";
+        return "admin/show_user_answers";
 
 
     }

@@ -11,8 +11,8 @@ import ru.dabutskikh.questionnaires.service.interfaces.QuestionService;
 
 @Controller
 @PreAuthorize("hasAuthority('questionnaires:write')")
-@RequestMapping("/answers")
-public class AnswerController {
+@RequestMapping("/admin/answers")
+public class AdminAnswerController {
 
     @Autowired
     QuestionService questionService;
@@ -22,14 +22,14 @@ public class AnswerController {
 
     @GetMapping
     public String getAllAnswersByQuestionId(Model model,
-                                                  @RequestParam("question_id") Long questionId) {
+                                            @RequestParam("question_id") Long questionId) {
         model.addAttribute("parentQuestion",
                 questionService.findById(questionId)
         );
         model.addAttribute("answers",
                 answerService.getAllAnswersByQuestionId(questionId)
         );
-        return "all_answers_of_question";
+        return "admin/all_answers_of_question";
     }
 
     @PostMapping
@@ -37,7 +37,7 @@ public class AnswerController {
                                @RequestParam("question_id") Long questionId) {
         answerForm.setQuestion(questionService.findById(questionId));
         answerService.save(answerForm);
-        return "redirect:/answers?question_id=" + questionId;
+        return "redirect:/admin/answers?question_id=" + questionId;
     }
 
     @GetMapping("/new")
@@ -45,7 +45,7 @@ public class AnswerController {
                                         @RequestParam("question_id") Long questionId) {
         model.addAttribute("parentQuestion", questionService.findById(questionId));
         model.addAttribute("answerForm", new Answer());
-        return "new_answer";
+        return "admin/new_answer";
     }
 
     @GetMapping("/{id}/edit")
@@ -58,7 +58,7 @@ public class AnswerController {
         }
 
         model.addAttribute("answer", answerService.findById(id));
-        return "edit_answer";
+        return "admin/edit_answer";
     }
 
     @PatchMapping("/{id}")
@@ -69,7 +69,7 @@ public class AnswerController {
             answerService.update(id, newAnswer);
         }
 
-        return "redirect:/answers?question_id="
+        return "redirect:/admin/answers?question_id="
                 + answer.getQuestion().getId();
     }
 
@@ -80,6 +80,6 @@ public class AnswerController {
         if (answer.isChangeable()) {
             answerService.delete(id);
         }
-        return "redirect:/answers?question_id=" + parentQuestionId;
+        return "redirect:/admin/answers?question_id=" + parentQuestionId;
     }
 }

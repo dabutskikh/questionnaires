@@ -7,8 +7,8 @@
 <body>
 <div>
     <h2 th:text="'New question for questionnaire ' + ${parentQuestionnaire.name}"/>
-    <a th:href="@{/questions(questionnaire_id=${parentQuestionnaire.id})}">Back</a>
-    <form th:method="POST" th:action="@{/questions(questionnaire_id=${parentQuestionnaire.id})}"
+    <a th:href="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}">Back</a>
+    <form th:method="POST" th:action="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}"
           th:object="${questionForm}">
         <p>
             <label for="name">Name</label>
