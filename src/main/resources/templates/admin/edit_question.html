@@ -6,18 +6,16 @@
         <nav th:replace="base::admin_navbar"></nav>
         <div class="container">
             <h2 th:text="'Редактирание формулировки вопроса (анкета: ' + ${question.questionnaire.name} + ')'"></h2>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a th:href="@{/admin/questions(questionnaire_id=${question.questionnaire.id})}">К списку анкет</a></li>
-                </ol>
-            </nav>
-            <div>
-                <form th:method="patch" th:action="@{/admin/questions/{id}(id=${question.id})}" th:object="${question}">
-                    <div>
+            <div class="row m-2">
+                <a th:href="@{/admin/questions(questionnaire_id=${question.questionnaire.id})}" class="col-md-2">← К вопросам</a>
+            </div>
+            <div class="row m-2">
+                <form th:method="patch" th:action="@{/admin/questions/{id}(id=${question.id})}" th:object="${question}" class="col-md-3">
+                    <div class="form-group">
                         <label for="name">Вопрос</label>
                         <input type="text" th:field="*{name}" id="name" name="name" placeholder="Новая формулировка" required>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
                         <label for="is_multiply">несколько вариантов ответа</label>
                     </div>

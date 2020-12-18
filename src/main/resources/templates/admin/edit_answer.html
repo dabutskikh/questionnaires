@@ -4,18 +4,18 @@
 <body>
     <div>
         <nav th:replace="base::admin_navbar"></nav>
-        <div>
+        <div class="container">
             <h2 th:text="'Редактирание формулировки ответа (вопрос: ' + ${answer.question.name} + ')'"></h2>
-            <div>
-                <a th:href="@{/admin/answers(question_id=${answer.question.id})}">К списку ответов</a>
+            <div class="row m-2">
+                <a th:href="@{/admin/answers(question_id=${answer.question.id})}" class="col-md-2">← К ответам</a>
             </div>
-            <div>
-                <form th:method="patch" th:action="@{/admin/answers/{id}(id=${answer.id})}" th:object="${answer}">
-                    <div>
+            <div class="row m-2">
+                <form th:method="patch" th:action="@{/admin/answers/{id}(id=${answer.id})}" th:object="${answer}" class="col-md-3">
+                    <div class="form-group">
                         <label for="name">Ответ</label>
                         <input type="text" th:field="*{name}" id="name" name="name" placeholder="Новая формулировка" required>
                     </div>
-                    <button type="submit">Редактировать</button>
+                    <button type="submit" class="btn btn-primary">Редактировать</button>
                 </form>
             </div>
         </div>

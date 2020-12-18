@@ -3,40 +3,80 @@
 <head th:replace="base::common_header('Анкета')"></head>
 <body>
     <div>
-        <nav th:replace="base::admin_navbar"></nav>
-        <div>
-            <h2 th:text="'Вопрос ' + ${idxQuestion} + '. ' + ${question.name}"></h2>
+        <th:block th:if="${isAdmin}">
+            <nav th:replace="base::admin_navbar"></nav>
+        </th:block>
+        <th:block th:if="not ${isAdmin}">
+            <nav th:replace="base::user_navbar"></nav>
+        </th:block>
+
+        <div class="container mt-2">
             <div>
-                <a href="#">К каталогу</a>
-            </div>
-            <div>
-                <form th:method="POST"
-                      th:action="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion})}"
-                      th:object="${userForm}">
-                    <ul>
-                        <li th:each="userAnswer, stat : ${userAnswerOptions}">
-                            <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
-                                   th:field="*{userAnswers}"
-                                   th:text="${userAnswer.userAnswerId.answer.name}"
-                                   th:value="${userId} + '_' + ${userAnswer.userAnswerId.answer.id}"
-                            >
-                        </li>
-                    </ul>
-                    <a th:if="${idxQuestion} > 1"
-                       th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} - 1)}"
-                       th:text="Предыдущий"/>
-                    <button type="submit">Сохранить ответ</button>
-                    <a th:if="${idxQuestion} != ${questionnaire.questions.size()}"
-                       th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"
-                       th:text="Следующий"/>
-                </form>
-                <form th:method="POST" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
-                    <button>Отправить анкету</button>
-                </form>
+                <h2 th:text="'Вопрос ' + ${idxQuestion} + '. ' + ${question.name}"></h2>
+                <div>
+                    <form th:method="post" th:action="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion})}"
+                          method="post" th:object="${userForm}">
+
+                        <ul class="list-unstyled m-2">
+                            <li th:each="userAnswer : ${userAnswerOptions}">
+                                <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"
+                                       th:field="*{userAnswers}"
+                                       th:text="${userAnswer.userAnswerId.answer.name}"
+                                       th:value="${userId} + '_' + ${userAnswer.userAnswerId.answer.id}"
+                                       class="m-1"
+                                >
+                            </li>
+                        </ul>
+                        <button type="submit" class="btn btn-primary m-2">Сохранить ответ</button>
+                        <a th:if="${idxQuestion} > 1"
+                           th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} - 1)}"
+                           th:text="Предыдущий"/>
+                        <a th:if="${idxQuestion} != ${questionnaire.questions.size()}"
+                           th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"
+                           th:text="Следующий"/>
+                    </form>
+                    <form th:method="post" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">
+                        <button type="submit" class="btn btn-success m-2">Отправить анкету</button>
+                    </form>
+                </div>
             </div>
         </div>
+
+
+<!--        <nav th:replace="base::admin_navbar"></nav>-->
+<!--        <div>-->
+<!--            <h2 th:text="'Вопрос ' + ${idxQuestion} + '. ' + ${question.name}"></h2>-->
+<!--            <div>-->
+<!--                <a href="#">К каталогу</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <form th:method="POST"-->
+<!--                      th:action="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion})}"-->
+<!--                      th:object="${userForm}">-->
+<!--                    <ul>-->
+<!--                        <li th:each="userAnswer, stat : ${userAnswerOptions}">-->
+<!--                            <input th:type="${question.multiplyAnswer} ? 'checkbox' : 'radio'"-->
+<!--                                   th:field="*{userAnswers}"-->
+<!--                                   th:text="${userAnswer.userAnswerId.answer.name}"-->
+<!--                                   th:value="${userId} + '_' + ${userAnswer.userAnswerId.answer.id}"-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <a th:if="${idxQuestion} > 1"-->
+<!--                       th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} - 1)}"-->
+<!--                       th:text="Предыдущий"/>-->
+<!--                    <button type="submit">Сохранить ответ</button>-->
+<!--                    <a th:if="${idxQuestion} != ${questionnaire.questions.size()}"-->
+<!--                       th:href="@{/questionnaire/{questionnaire_id}(questionnaire_id=${questionnaire.id}, question=${idxQuestion} + 1)}"-->
+<!--                       th:text="Следующий"/>-->
+<!--                </form>-->
+<!--                <form th:method="POST" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">-->
+<!--                    <button>Отправить анкету</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
-<div>
+<!--<div>-->
 
 <!--    <h2 th:text="${questionnaire.name}"/>-->
 <!--    <h2 th:text="'Вопрос №' + ${idxQuestion} + ': ' + ${question.name}"/>-->
@@ -63,6 +103,6 @@
 <!--    <form th:method="POST" th:action="@{/questionnaire/{questionnaire_id}/save(questionnaire_id=${questionnaire.id})}">-->
 <!--        <button>Отправить анкету</button>-->
 <!--    </form>-->
-</div>
+<!--</div>-->
 </body>
 </html>

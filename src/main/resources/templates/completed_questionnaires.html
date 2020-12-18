@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="base::common_header('Отправленные анкеты')"/>
+<head th:replace="base::common_header('Завершенные')"/>
 <body>
-<div>
-    <h2>Отправленные анкеты</h2>
-<!--    <a href="#">Back</a>-->
-    <table>
-        <tr th:each="questionnaire : ${qustionnaires}">
-            <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/watch(questionnaire_id=${questionnaire.id})}" th:text="'Посмотреть ответы'"></a></td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <th:block th:if="${isAdmin}">
+            <nav th:replace="base::admin_navbar"></nav>
+        </th:block>
+        <th:block th:if="not ${isAdmin}">
+            <nav th:replace="base::user_navbar"></nav>
+        </th:block>
+        <div class="container">
+            <h2>Завершенные анкеты</h2>
+            <div>
+                <div th:each="questionnaire : ${qustionnaires}" class="row m-2">
+                    <span th:text="${questionnaire.name}" class="col-md-2"></span>
+                    <a th:href="@{/watch(questionnaire_id=${questionnaire.id})}" class="col-md-2 btn btn-primary btn-block">Посмотреть ответы</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -7,15 +7,23 @@
         <div class="container">
             <h2>Все анкеты</h2>
             <div>
-                <div th:each="questionnaire : ${questionnaires}"  class="row m-2">
+                <div th:each="questionnaire : ${questionnaires}" class="row m-2">
                     <span th:text="${questionnaire.name}" class="col-md-2"></span>
-                    <span class="col-md-2">
-                        <th:block th:switch="${questionnaire.isChangeable()}">
-<!--                            <a class="disabled" th:href="@{/admin/questionnaires/{id}/edit(id=${questionnaire.id})}">Редактировать</a>-->
-                        </th:block>
-                    </span>
                     <span class="col-md-2"><a th:href="@{/admin/questions(questionnaire_id=${questionnaire.id})}">Вопросы</a></span>
-                    <span class="col-md-2"><a th:href="@{/admin/questionnaires/{id}/users(id=${questionnaire.id})}">Список ответивших</a></span>
+                    <th:block th:switch="${questionnaire.isChangeable()}">
+                        <th:block th:case="true">
+                            <span class="col-md-2">
+                                <a th:href="@{/admin/questionnaires/{id}/edit(id=${questionnaire.id})}">Редактировать</a>
+                            </span>
+                            <span class="col-md-2 text-warning">Не опубликована</span>
+                        </th:block>
+                        <th:block th:case="false">
+                            <span class=" col-md-2 text-warning">Редактирование заблокировано</span>
+                            <span class="col-md-2">
+                                <a th:href="@{/admin/questionnaires/{id}/users(id=${questionnaire.id})}">Список ответивших</a>
+                            </span>
+                        </th:block>
+                    </th:block>
                     <form th:method="delete" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}" class="col-md-2">
                         <th:block th:switch="${questionnaire.isValid()}">
                             <th:block th:case="true">
@@ -29,33 +37,13 @@
                                 <span class="text-danger">Не валидна</span>
                             </th:block>
                         </th:block>
-
-<!--                        <th:block th:if="not ${questionnaire.isValid()}">-->
-<!--                            <span class="text-danger">Не валидна</span>-->
-<!--                        </th:block>-->
-<!--                        <th:block th:un></th:block>-->
-
-<!--                        <th:block th:switch="${questionnaire.status.name()}" class="btn btn-primary btn-block">-->
-
-<!--                            <button th:case="'CREATED'" class="btn btn-primary btn-block">Опубликовать</button>-->
-<!--                            <button th:case="'PUBLISHED'" class="btn btn-primary btn-block">Закрыть доступ</button>-->
-<!--                            <button th:case="'HIDDEN'" class="btn btn-primary btn-block">Открыть доступ</button>-->
-<!--                        </th:block>-->
                     </form>
                 </div>
             </div>
             <div class="row m-2">
-                <a class="col-md-2" href="/admin/questionnaires/new">Создать анкету</a>
+                <a class="col-md-2" href="/admin/questionnaires/new">+ Создать анкету</a>
             </div>
-
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
-            crossorigin="anonymous"></script>
 </body>
 </html>

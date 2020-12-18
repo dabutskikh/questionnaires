@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New question</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base::common_header('Вопрос')"></head>
 <body>
-<div>
-    <h2 th:text="'New question for questionnaire ' + ${parentQuestionnaire.name}"/>
-    <a th:href="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}">Back</a>
-    <form th:method="POST" th:action="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}"
-          th:object="${questionForm}">
-        <p>
-            <label for="name">Name</label>
-            <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>
-        </p>
-        <p>
-            <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
-            <label for="is_multiply">is multiply answer</label>
-        </p>
-        <button type="submit">Create</button>
-    </form>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div class="container">
+            <h2 th:text="'Новый вопрос (анкета: ' + ${parentQuestionnaire.name} + ')'"></h2>
+            <div class="row m-2">
+                <a th:href="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}" class="col-md-2">← К вопросам</a>
+            </div>
+            <div class="row m-2">
+                <form th:method="post" th:action="@{/admin/questions(questionnaire_id=${parentQuestionnaire.id})}" th:object="${questionForm}" class="col-md-3">
+                    <div class="form-group">
+                        <label for="name">Вопрос</label>
+                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Формулировка" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="is_multiply" name="is_multiply" th:field="*{multiplyAnswer}">
+                        <label for="is_multiply">несколько вариантов ответа</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

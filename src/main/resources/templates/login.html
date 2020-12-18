@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="base::common_header('Авторизация')"/>
+<head th:replace="base::common_header('Вход')"/>
 <body>
 <div class="container">
-    <form class="form-signin" method="post" action="/auth/login">
-        <h2 class="form-signin-heading">Вход</h2>
-        <p>
-            <label for="username" class="sr-only">Логин</label>
-            <input type="text" id="username" class="form-control" name="username" placeholder="Логин" required autofocus>
-        </p>
-        <p>
-            <label for="password" class="sr-only">Пароль</label>
-            <input type="password"  class="form-control" id="password" name="password" placeholder="Пароль" required>
-        </p>
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
-    </form>
+    <div class="row">
+        <form class="form-signin mx-auto col-md-3" method="post" action="/auth/login">
+            <h2 class="form-signin-heading text-center">Вход</h2>
+            <p>
+                <label for="username" class="sr-only">Логин</label>
+                <input type="text" id="username" class="form-control" name="username" placeholder="Логин" required autofocus>
+            </p>
+            <p>
+                <label for="password" class="sr-only">Пароль</label>
+                <input type="password"  class="form-control" id="password" name="password" placeholder="Пароль" required>
+            </p>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+            <a class="btn btn-info btn-block" href="/registration">Регистрация</a>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>

@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="base::admin_navbar"></head>
+<head th:replace="base::common_header('Ответ')"></head>
 <body>
-<!--    <div>-->
-<!--        <nav th:replace="base::admin_navbar"></nav>-->
-<!--        <div>-->
-<!--            <h2 th:text="'Создание ответа (вопрос: ' + ${answerForm.question.name} + ')'"></h2>-->
-<!--            <div>-->
-<!--                <a th:href="@{/admin/answers(question_id=${answerForm.question.id})}">К списку ответов</a>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <form th:method="patch" th:action="@{/admin/answers/{id}(id=${answerForm.id})}" th:object="${answerForm}">-->
-<!--                    <div>-->
-<!--                        <label for="name">Ответ</label>-->
-<!--                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Формулировка" required>-->
-<!--                    </div>-->
-<!--                    <button type="submit">Создать</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<div>
-    <h2 th:text="'New answer for question ' + ${parentQuestion.name}"/>
-    <a th:href="@{/admin/answers(question_id=${parentQuestion.id})}">Back</a>
-    <form th:method="POST" th:action="@{/admin/answers(question_id=${parentQuestion.id})}"
-          th:object="${answerForm}">
-        <p>
-            <label for="name">Name</label>
-            <input type="text" th:field="*{name}" id="name" name="name" placeholder="Name" required>
-        </p>
-        <button type="submit">Create</button>
-    </form>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div class="container">
+            <h2 th:text="'Новый ответ (вопрос: ' + ${parentQuestion.name} + ')'"></h2>
+            <div class="row m-2">
+                <a th:href="@{/admin/answers(question_id=${parentQuestion.id})}" class="col-md-2">← К ответам</a>
+            </div>
+            <div class="row m-2">
+                <form th:method="post" th:action="@{/admin/answers(question_id=${parentQuestion.id})}" th:object="${answerForm}" class="col-md-3">
+                    <div class="form-group">
+                        <label for="name">Ответ</label>
+                        <input type="text" th:field="*{name}" id="name" name="name" placeholder="Формулировка" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

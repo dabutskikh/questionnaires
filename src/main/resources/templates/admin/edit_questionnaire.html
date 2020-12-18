@@ -4,18 +4,18 @@
 <body>
     <div>
         <nav th:replace="base::admin_navbar"></nav>
-        <div>
+        <div class="container">
             <h2>Редактирание названия анкеты</h2>
-            <div>
-                <a href="/admin/questionnaires">К анкетам</a>
+            <div class="row m-2">
+                <a href="/admin/questionnaires" class="col-md-2">← К анкетам</a>
             </div>
-            <div>
-                <form th:method="patch" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}" th:object="${questionnaire}">
-                    <div>
+            <div class="row m-2">
+                <form th:method="patch" th:action="@{/admin/questionnaires/{id}(id=${questionnaire.id})}" th:object="${questionnaire}" class="col-md-3">
+                    <div class="form-group">
                         <label for="name">Анкета</label>
                         <input type="text" th:field="*{name}" id="name" name="name" placeholder="Новая формалировка" required>
                     </div>
-                    <button type="submit">Редактировать</button>
+                    <button type="submit" class="btn btn-primary">Редактировать</button>
                 </form>
             </div>
         </div>

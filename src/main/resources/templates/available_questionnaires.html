@@ -2,16 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base::common_header('Каталог')"/>
 <body>
-<div>
-    <nav th:replace="base::admin_navbar"></nav>
-    <h2>Каталог анкет</h2>
-<!--    <a href="#">Back</a>-->
-    <table>
-        <tr th:each="questionnaire : ${qustionnaires}">
-            <td th:text="${questionnaire.name}"></td>
-            <td><a th:href="@{/questionnaire/{id}(id=${questionnaire.id}, question=1)}" th:text="'Пройти'"></a></td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <th:block th:if="${isAdmin}">
+            <nav th:replace="base::admin_navbar"></nav>
+        </th:block>
+        <th:block th:if="not ${isAdmin}">
+            <nav th:replace="base::user_navbar"></nav>
+        </th:block>
+        <div class="container">
+            <h2>Каталог анкет</h2>
+            <div>
+                <div th:each="questionnaire : ${qustionnaires}" class="row m-2">
+                    <span th:text="${questionnaire.name}" class="col-md-2"></span>
+                    <a th:href="@{/questionnaire/{id}(id=${questionnaire.id}, question=1)}" class="col-md-2 btn btn-primary btn-block">Пройти</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

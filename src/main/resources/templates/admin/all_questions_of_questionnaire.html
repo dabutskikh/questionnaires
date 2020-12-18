@@ -4,22 +4,34 @@
 <body>
     <div>
         <nav th:replace="base::admin_navbar"></nav>
-        <div>
+        <div class="container">
             <h2 th:text="'Вопросы к анкете: ' + ${parentQuestionnaire.name}"></h2>
-            <div>
-                <a href="/admin/questionnaires">К анкете</a>
+            <div class="row m-2">
+                <a href="/admin/questionnaires" class="col-md-2">← К анкетам</a>
             </div>
             <div>
-                <div th:each="question : ${questions}">
-                    <span th:text="${question.name}"></span>
-                    <span><a th:href="@{/admin/questions/{id}/edit(id=${question.id})}">Редактировать</a></span>
-                    <span><a th:href="@{/admin/answers(question_id=${question.id})}" th:text="Ответы"></a></span>
-                    <form th:method="delete" th:action="@{/admin/questions/{id}(id=${question.id})}" style="display: inline">
-                        <button type="submit">Удалить</button>
-                    </form>
+                <div th:each="question : ${questions}" class="row m-2">
+                    <span th:text="${question.name}" class="col-md-2"></span>
+                    <span class="col-md-2"><a th:href="@{/admin/answers(question_id=${question.id})}" th:text="Ответы"></a></span>
+                    <th:block th:switch="${question.isChangeable()}">
+                        <th:block th:case="true">
+                            <span class="col-md-2">
+                                <a th:href="@{/admin/questions/{id}/edit(id=${question.id})}">Редактировать</a>
+                            </span>
+                            <form th:method="delete" th:action="@{/admin/questions/{id}(id=${question.id})}" class="col-md-2">
+                                <button type="submit" class="btn btn-primary btn-block">Удалить</button>
+                            </form>
+                        </th:block>
+                        <th:block th:case="false">
+                            <span class=" col-md-2 text-warning">Редактирование заблокировано</span>
+                            <span class="col-md-2 text-warning">Удаление заблокировано</span>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
-            <a th:href="@{/admin/questions/new(questionnaire_id=${parentQuestionnaire.id})}">Добавить вопрос</a>
+            <div class="row m-2">
+                <a class="col-md-2" th:if="${parentQuestionnaire.isChangeable()}" th:href="@{/admin/questions/new(questionnaire_id=${parentQuestionnaire.id})}">+ Добавить вопрос</a>
+            </div>
         </div>
     </div>
 </body>

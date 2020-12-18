@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.dabutskikh.questionnaires.model.Answer;
-import ru.dabutskikh.questionnaires.model.Questionnaire;
-import ru.dabutskikh.questionnaires.model.User;
-import ru.dabutskikh.questionnaires.model.UserAnswer;
+import ru.dabutskikh.questionnaires.model.*;
 import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
@@ -35,6 +32,7 @@ public class ServiceController {
     public String getAvailableQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
+        model.addAttribute("isAdmin", user.getRole().equals(Role.ADMIN));
         model.addAttribute("qustionnaires", questionnaireService.getAvailableQuestionnaires(user));
         return "available_questionnaires";
     }
@@ -43,6 +41,7 @@ public class ServiceController {
     public String getCurrentQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                            Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
+        model.addAttribute("isAdmin", user.getRole().equals(Role.ADMIN));
         model.addAttribute("qustionnaires", questionnaireService.getCurrentQuestionnaires(user));
         return "current_questionnaires";
     }
@@ -51,6 +50,7 @@ public class ServiceController {
     public String getCompletedQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {
         User user = userService.findByLogin(currentUser.getUsername());
+        model.addAttribute("isAdmin", user.getRole().equals(Role.ADMIN));
         model.addAttribute("qustionnaires", questionnaireService.getCompletedQuestionnaires(user));
         return "completed_questionnaires";
     }

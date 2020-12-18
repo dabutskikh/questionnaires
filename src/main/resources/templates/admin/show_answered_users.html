@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Answered users</title>
-</head>
+<head th:replace="base::common_header('Пользователи')"></head>
 <body>
-<div>
-    <h2>Users</h2>
-    <table>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.login}"></td>
-            <td>
-                <form method="post"
-                      th:action="@{/admin/questionnaires/answers(questionnaire_id=${questionnaire_id}, login=${user.login})}">
-                    <button type="submit">Show answers</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <nav th:replace="base::admin_navbar"></nav>
+        <div class="container">
+            <h2 th:text="'Ответившие пользователи (анкета: ' + questionnaire.name + ')'"></h2>
+            <div class="row m-2">
+                <a href="/admin/questionnaires" class="col-md-2">← К анкетам</a>
+            </div>
+            <div>
+                <div th:each="user : ${users}" class="row m-2">
+                    <span th:text="${user.login}" class="col-md-2"></span>
+                    <form th:method="post" th:action="@{/admin/questionnaires/answers(questionnaire_id=${questionnaire.id}, login=${user.login})}" class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block">Показать ответы</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

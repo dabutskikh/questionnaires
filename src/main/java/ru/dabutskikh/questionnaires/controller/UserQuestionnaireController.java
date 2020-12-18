@@ -43,6 +43,7 @@ public class UserQuestionnaireController {
                 userAnswerService.getUserAnswersToQuestion(user, question)
         );
 
+        model.addAttribute("isAdmin", user.getRole().equals(Role.ADMIN));
         model.addAttribute("userId", user.getId());
 
         model.addAttribute("questionnaire", questionnaire);

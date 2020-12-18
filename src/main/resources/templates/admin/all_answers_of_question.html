@@ -4,21 +4,33 @@
 <body>
     <div>
         <nav th:replace="base::admin_navbar"></nav>
-        <div>
+        <div class="container">
             <h2 th:text="'Варианты ответов на вопрос: ' + ${parentQuestion.name}"></h2>
-            <div>
-                <a th:href="@{/admin/questions(questionnaire_id=${parentQuestion.questionnaire.id})}">К вопросу</a>
+            <div class="row m-2">
+                <a th:href="@{/admin/questions(questionnaire_id=${parentQuestion.questionnaire.id})}" class="col-md-2">← К вопросам</a>
             </div>
             <div>
-                <div th:each="answer : ${answers}">
-                    <span th:text="${answer.name}"></span>
-                    <span><a th:href="@{/admin/answers/{id}/edit(id=${answer.id})}">Редактировать</a></span>
-                    <form th:method="delete" th:action="@{/admin/answers/{id}(id=${answer.id})}" style="display: inline">
-                        <button type="submit">Удалить</button>
-                    </form>
+                <div th:each="answer : ${answers}" class="row m-2">
+                    <span th:text="${answer.name}" class="col-md-2"></span>
+                    <th:block th:switch="${answer.isChangeable()}">
+                        <th:block th:case="true">
+                            <span class="col-md-2">
+                                <a th:href="@{/admin/answers/{id}/edit(id=${answer.id})}">Редактировать</a>
+                            </span>
+                            <form th:method="delete" th:action="@{/admin/answers/{id}(id=${answer.id})}" class="col-md-2">
+                                <button type="submit" class="btn btn-primary btn-block">Удалить</button>
+                            </form>
+                        </th:block>
+                        <th:block th:case="false">
+                            <span class=" col-md-2 text-warning">Редактирование заблокировано</span>
+                            <span class="col-md-2 text-warning">Удаление заблокировано</span>
+                        </th:block>
+                    </th:block>
                 </div>
             </div>
-            <a th:href="@{/admin/answers/new(question_id=${parentQuestion.id})}">Добавить ответ</a>
+            <div class="row m-2">
+                <a class="col-md-2" th:if="${parentQuestion.isChangeable()}" th:href="@{/admin/answers/new(question_id=${parentQuestion.id})}">+ Добавить ответ</a>
+            </div>
         </div>
     </div>
 </body>

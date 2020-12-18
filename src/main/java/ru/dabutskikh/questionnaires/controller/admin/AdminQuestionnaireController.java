@@ -101,7 +101,7 @@ public class AdminQuestionnaireController {
                                       Model model) {
         Questionnaire questionnaire = questionnaireService.findById(id);
         model.addAttribute("users", userService.getAnsweredUser(questionnaire));
-        model.addAttribute("questionnaire_id", id);
+        model.addAttribute("questionnaire", questionnaire);
         return "admin/show_answered_users";
     }
 
