@@ -43,14 +43,6 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public void toPublish(Questionnaire questionnaire) {
-//        if (questionnaire.getQuestions().size() == 0) {
-//            return;
-//        }
-//        for (Question question : questionnaire.getQuestions()) {
-//            if (question.getAnswers().size() < 2) {
-//                return;
-//            }
-//        }
         questionnaire.setStatus(QuestionnaireStatus.PUBLISHED);
         save(questionnaire);
     }

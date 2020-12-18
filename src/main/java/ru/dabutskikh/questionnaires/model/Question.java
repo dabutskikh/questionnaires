@@ -82,16 +82,6 @@ public class Question {
         return questionnaire.isChangeable();
     }
 
-//    @Override
-//    public String toString() {
-//        return "Question{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", questionnaire=" + questionnaire +
-//                '}';
-//    }
-
-
     @Override
     public String toString() {
         return "Question{" +

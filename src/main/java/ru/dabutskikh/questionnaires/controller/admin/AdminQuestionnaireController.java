@@ -82,15 +82,12 @@ public class AdminQuestionnaireController {
         switch (questionnaire.getStatus()){
             case CREATED:
                 questionnaireService.setStatus(questionnaire, QuestionnaireStatus.PUBLISHED);
-//                questionnaireService.toPublish(questionnaire);
                 break;
             case PUBLISHED:
                 questionnaireService.setStatus(questionnaire, QuestionnaireStatus.HIDDEN);
-//                questionnaireService.toHide(questionnaire);
                 break;
             case HIDDEN:
                 questionnaireService.setStatus(questionnaire, QuestionnaireStatus.PUBLISHED);
-//                questionnaireService.toShow(questionnaire);
                 break;
         }
         return "redirect:/admin/questionnaires";

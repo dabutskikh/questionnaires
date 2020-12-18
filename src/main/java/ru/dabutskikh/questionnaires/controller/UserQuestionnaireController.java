@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/questionnaire")
 public class UserQuestionnaireController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class UserQuestionnaireController {
     @Autowired
     UserAnswerService userAnswerService;
 
-    @GetMapping("/questionnaire/{id}")
+    @GetMapping("/{id}")
     public String getQuestion(@AuthenticationPrincipal UserDetails currentUser,
                               @PathVariable("id") Long questionnaireId,
                               @RequestParam("question") int idxQuestion,
@@ -58,7 +59,7 @@ public class UserQuestionnaireController {
     }
 
 
-    @PostMapping("/questionnaire/{id}")
+    @PostMapping("/{id}")
     public String saveAnswers(@AuthenticationPrincipal UserDetails currentUser,
                               @PathVariable("id") Long questionnaireId,
                               @RequestParam("question") int idxQuestion,
@@ -69,13 +70,11 @@ public class UserQuestionnaireController {
         Questionnaire questionnaire = questionnaireService.findById(questionnaireId);
         Question question = questionnaire.getQuestions().get(idxQuestion - 1);
 
-        System.out.println(userForm.getUserAnswers());
-
         userAnswerService.replaceQuestionUserAnswers(user, question, userForm.getUserAnswers());
         return "redirect:/questionnaire/" + questionnaireId + "?question=" + idxQuestion;
     }
 
-    @PostMapping("/questionnaire/{id}/save")
+    @PostMapping("/{id}/save")
     public String completeQuestionnaire(@AuthenticationPrincipal UserDetails currentUser,
                                         @PathVariable Long id) {
         User user = userService.findByLogin(currentUser.getUsername());

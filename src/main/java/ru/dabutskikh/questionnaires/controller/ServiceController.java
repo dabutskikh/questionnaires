@@ -28,6 +28,11 @@ public class ServiceController {
     @Autowired
     QuestionnaireService questionnaireService;
 
+    @GetMapping
+    public String getCatalog() {
+        return "redirect:/catalog";
+    }
+
     @GetMapping("/catalog")
     public String getAvailableQuestionnaires(@AuthenticationPrincipal UserDetails currentUser,
                                              Model model) {
