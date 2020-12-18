@@ -14,7 +14,7 @@
             <div>
                 <div th:each="questionnaire : ${qustionnaires}" class="row m-2">
                     <span th:text="${questionnaire.name}" class="col-md-2"></span>
-                    <a th:href="@{/watch(questionnaire_id=${questionnaire.id})}" class="col-md-2 btn btn-primary btn-block">Продолжить</a>
+                    <a th:href="@{/questionnaire/{id}/(id=${questionnaire.id}, question=1)}" class="col-md-2 btn btn-primary btn-block">Продолжить</a>
                 </div>
             </div>
         </div>
