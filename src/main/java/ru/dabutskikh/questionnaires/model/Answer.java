@@ -1,7 +1,6 @@
 package ru.dabutskikh.questionnaires.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;

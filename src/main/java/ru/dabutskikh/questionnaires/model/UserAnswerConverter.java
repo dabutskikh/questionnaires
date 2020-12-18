@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.dabutskikh.questionnaires.service.interfaces.AnswerService;
-import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
 

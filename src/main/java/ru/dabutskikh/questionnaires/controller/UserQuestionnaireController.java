@@ -11,10 +11,6 @@ import ru.dabutskikh.questionnaires.service.interfaces.QuestionnaireService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserAnswerService;
 import ru.dabutskikh.questionnaires.service.interfaces.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 @Controller
 @RequestMapping("/questionnaire")
 public class UserQuestionnaireController {
@@ -55,7 +51,7 @@ public class UserQuestionnaireController {
 
         model.addAttribute("idxQuestion", idxQuestion);
 
-        return "test_question";
+        return "answer_to_question";
     }
 
 
